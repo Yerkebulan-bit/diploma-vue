@@ -28,7 +28,10 @@ import type {PropType} from "vue";
 import {formatDate} from "../../utiities/functions/formatDate";
 
 const props = defineProps({
-  event: Object as PropType<IEvent>
+  event: {
+    type: Object as PropType<IEvent>,
+    required: true
+  }
 })
 
 
