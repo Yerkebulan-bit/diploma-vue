@@ -19,10 +19,11 @@ const mainEvents = computed(() => {
 const weekEvents = computed(() => {
   return store.getters["weekEvents/getWeekEvents"]
 })
-const fetchMainEvents = store.dispatch('mainEvents/fetchMainEvents')
-const fetchWeekEvents = store.dispatch('weekEvents/fetchWeekEvent')
+const fetchMainEvents = await store.dispatch('mainEvents/fetchMainEvents')
+const fetchWeekEvents = await store.dispatch('weekEvents/fetchWeekEvent')
 
-onMounted(() => {
-  fetchMainEvents()
+onMounted(async () => {
+  await fetchMainEvents()
+  console.log(mainEvents)
 })
 </script>

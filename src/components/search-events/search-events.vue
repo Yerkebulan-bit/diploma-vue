@@ -18,7 +18,7 @@
         <div class="schedule-tabs__body">
           <div class="schedule-tabs__block _active" id="tab1">
             <div class="schedule-tabs__movie movie">
-              <a href="movie.html" class="movie__image _ibg"><img src="./img/posters/poster_1.jpg" alt=""></a>
+<!--              <a href="movie.html" class="movie__image _ibg"><img src="./img/posters/poster_1.jpg" alt=""></a>-->
               <div class="movie__info">
                 <div class="movie__genre">FOOD FESTIVAL</div>
                 <div class="movie__name">Brewery Tour And Tasting at Brewery Lemke</div>
@@ -40,7 +40,7 @@
               </div>
             </div>
             <div class="schedule-tabs__movie movie">
-              <a href="" class="movie__image _ibg"><img src="./img/posters/poster_3.jpg" alt=""></a>
+<!--              <a href="" class="movie__image _ibg"><img src="./img/posters/poster_3.jpg" alt=""></a>-->
               <div class="movie__info">
                 <div class="movie__genre">
                   FOOD EVENT</div>
@@ -61,7 +61,7 @@
               </div>
             </div>
             <div class="schedule-tabs__movie movie">
-              <a href="/batman.html" class="movie__image _ibg"><img src="./img/posters/poster_4.jpg" alt=""></a>
+<!--              <a href="/batman.html" class="movie__image _ibg"><img src="./img/posters/poster_4.jpg" alt=""></a>-->
               <div class="movie__info">
                 <div class="movie__genre">FOOD EVENT</div>
                 <div class="movie__name">

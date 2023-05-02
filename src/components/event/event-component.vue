@@ -1,7 +1,7 @@
 <template>
   <div class="poster">
     <div class="poster__image _ibg">
-      <img src="./img/posters/poster_1.jpg" alt="">
+<!--      <img src="./img/posters/poster_1.jpg" alt="">-->
       <div class="poster__additional-info">
         <router-link to="" class="poster__btn"><i class="fa fa-play"></i></router-link>
         <a href="movie.html" class="poster__more-info">Show more</a>

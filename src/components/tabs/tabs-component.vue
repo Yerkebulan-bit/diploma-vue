@@ -5,9 +5,7 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps({
-  tabs:
-})
+
 </script>
 
 <style lang="scss">
