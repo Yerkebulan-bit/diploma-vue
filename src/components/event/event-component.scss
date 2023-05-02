@@ -1,0 +1,133 @@
+.poster {
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+  min-width: 270px;
+  max-width: 270px;
+}
+@media (max-width: 991.98px) {
+  .poster {
+    min-width: 220px;
+  }
+}
+.poster:not(:last-child) {
+  margin: 0 30px 0 0;
+}
+.poster__image {
+  width: 100%;
+  height: 340px;
+  margin: 0 0 20px 0;
+  border-radius: 10px;
+  cursor: pointer;
+}
+@media (max-width: 991.98px) {
+  .poster__image {
+    height: 270px;
+  }
+}
+.poster__image::before {
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  left: -100px;
+  width: 0;
+  height: 100%;
+  content: "";
+  transition: all 0.5s ease 0s;
+  transform: skewX(30deg);
+  background: rgba(0, 0, 0, 0.7);
+}
+.poster__image:hover::before {
+  width: 200%;
+}
+.poster__image:hover .poster__additional-info {
+  opacity: 1;
+}
+.poster__name {
+  display: block;
+  font-size: 18px;
+  color: #4a4a4a;
+  letter-spacing: 2px;
+  font-weight: 300;
+  line-height: 1.4em;
+  margin: 0 0 20px 0;
+}
+@media (max-width: 767.98px) {
+  .poster__name {
+    font-size: 16px;
+    margin: 0 0 5px 0;
+  }
+}
+.poster__rating i {
+  font-size: 16px;
+  color: #fbbd61;
+}
+.poster__rating i:not(:last-child) {
+  margin: 0 5px 0 0;
+}
+.poster__rating i.grey {
+  color: rgba(139, 137, 137, 0.333);
+}
+@media (max-width: 767.98px) {
+  .poster__rating i {
+    font-size: 14px;
+  }
+}
+.poster__additional-info {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 10px;
+  z-index: 3;
+  transition: opacity 0.5s ease 0s;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+.poster__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 20px 0;
+  width: 80px;
+  height: 80px;
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  transition: all 0.3s ease 0s;
+}
+.poster__btn i {
+  font-size: 12px;
+  padding-left: 5px;
+}
+.poster__btn:hover {
+  border-color: #fbbd61;
+  transform: scale(0.8);
+}
+.poster__btn:hover i {
+  color: #fbbd61;
+  font-size: 10px;
+}
+.poster__more-info {
+  display: block;
+  margin: 0 0 10px 0;
+  transition: all 0.3s ease 0s;
+}
+.poster__more-info:hover {
+  color: #fbbd61;
+}
+.poster__release-date {
+  font-size: 16px;
+  color: #fff;
+}
+.poster__more-info {
+  font-size: 13px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #fff;
+}

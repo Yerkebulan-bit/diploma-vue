@@ -1,0 +1,62 @@
+@import "null";
+@import "common";
+@import "icons";
+@import "fonts";
+$minWidth: 320;
+
+// Ширина полотна (макета)
+$maxWidth: 1920;
+
+// Ширина ограничивающего контейнера (0 = нет ограничения)
+$maxWidthContainer: 1136;
+
+// Общий отступ у контейнера
+// (30 = по 15px слева и справа, 0 = нет отступа)
+$containerPadding: 30;
+
+//Ширина срабатывания первого брейкпоинта
+//Брейк-поинты
+$containerWidth: $maxWidthContainer + $containerPadding;
+
+$pc: $containerWidth; // ПК, ноутбуки, некоторые планшеты в горизонтальном положении
+$laptop: 1366.98;
+$tablet: 991.98; // Планшеты, некоторые телефоны в горизонтальном положении
+$mobile: 767.98; // Телефоны L
+$mobileSmall: 479.98; // Телефоны S
+
+._container {
+  max-width: 1110px;
+  box-sizing: content-box;
+  padding: 0 20px;
+  margin: 0 auto;
+
+  @media (max-width: $pc + px) {
+    max-width: 970px;
+  }
+  @media (max-width: $mobile + px) {
+    max-width: none;
+    padding: 0;
+  }
+}
+
+._img-wrapper{
+  img{
+    height: 100%;
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+._ibg{
+  position: relative;
+  img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+  }
+}
+
+
