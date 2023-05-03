@@ -1,0 +1,117 @@
+.event-search {
+  padding: 0 0 30px 0;
+}
+.event-search:not(:last-child) {
+  margin: 0 0 40px 0;
+  border-bottom: 1px solid #d8d8d8;
+}
+@media (min-width: 767.98px) {
+  .event-search:not(:last-child) {
+    margin: 0 0 30px 0;
+  }
+}
+@media (min-width: 767.98px) {
+  .event-search {
+    display: flex;
+    align-items: flex-start;
+    padding: 0 0 40px 0;
+  }
+}
+.event-search__image {
+  display: block;
+  min-width: 165px;
+  min-height: 207px;
+  margin: 0 30px 0 0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+@media (max-width: 767.98px) {
+  .event-search__image {
+    margin: 0 0 20px 0;
+  }
+}
+.event-search__genre {
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #fbbd61;
+}
+.event-search__name {
+  font-weight: 300;
+  font-size: 24px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  color: #101010;
+  line-height: 1.4em;
+  margin: 0 0 10px 0;
+}
+.event-search__description {
+  color: #717171;
+  font-size: 16px;
+  line-height: 1.42857143;
+  margin: 0 0 20px 0;
+}
+.event-search__more {
+  display: block;
+  font-size: 12px;
+  position: relative;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  transition: color 0.3s ease 0s;
+  color: #ec7532;
+  margin: 0 0 20px 0;
+}
+.event-search__more:hover {
+  color: #fbbd61;
+}
+.event-search__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.event-search__schedule {
+  display: flex;
+  align-items: center;
+}
+.event-search__title {
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #4a4a4a;
+  margin: 0 10px 0 0;
+}
+.event-search__times {
+  display: flex;
+}
+.event-search__time {
+  cursor: pointer;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  padding: 0 10px;
+  color: #717171;
+  border-radius: 5px;
+  background-color: #d8d8d8;
+}
+.event-search__time:not(:last-child) {
+  margin: 0 5px 0 0;
+}
+.event-search__duration {
+  display: flex;
+  align-items: center;
+}
+.event-search__icon {
+  width: 33px;
+  height: 33px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 33px;
+  color: #fff;
+  border-radius: 50%;
+  background: #4a4a4a;
+}

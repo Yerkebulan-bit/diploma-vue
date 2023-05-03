@@ -49,7 +49,7 @@ const navigation: INavigationBlock[] = [
       {
         id: 1,
         title: 'Связаться с нами',
-        route: '/',
+        route: '/contact',
       }
     ]
   },

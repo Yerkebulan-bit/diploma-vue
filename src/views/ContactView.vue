@@ -7,9 +7,6 @@
   </div>
   <div class="contact">
     <div class="contact__container _container">
-      <div class="contact__map">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5813.467273143347!2d76.82170809999998!3d43.236043999999985!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38836e7d16c5cbab%3A0x3d44668fad986d76!2z0JDQu9C80LDRgtGL!5e0!3m2!1sru!2skz!4v1652112316578!5m2!1sru!2skz" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
       <div class="contact__body">
         <h2 class="contact__title">SEND MESSAGE</h2>
         <form action="" class="contact__form contact-form">
@@ -208,5 +205,36 @@
   color: #717171 !important;
   font-size: 16px !important;
   line-height: 1.42857143;
+}
+
+/*----------------------------------------------------*/
+.page-top {
+  background: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 1)), url(../img/main-slider/Slide_2.jpg);
+}
+.page-top__container {
+  padding: 200px 15px 100px;
+}
+@media (max-width: 767.98px) {
+  .page-top__container {
+    padding: 80px 20px 60px;
+  }
+}
+.page-top__text {
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #fbbd61;
+}
+.page-top__title {
+  font-size: 52px;
+  font-weight: 300;
+  letter-spacing: 3px;
+  line-height: 1.4em;
+  color: #fff;
+}
+@media (max-width: 767.98px) {
+  .page-top__title {
+    font-size: 35px;
+  }
 }
 </style>

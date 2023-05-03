@@ -32,9 +32,9 @@ const router = createRouter({
     },
     {
       path: '/contact',
-      name: 'contact',
+      name: 'event',
       component: ContactView,
-    }
+    },
   ],
   scrollBehavior(to, from, savedPosition) {
     // always scroll to top

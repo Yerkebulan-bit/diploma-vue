@@ -22,7 +22,7 @@ export default {
                     password: 'secret'
                 }
             })
-            if (response) commit("setAccessToken", response.access_token); router.push('/')
+            if (response) commit("setAccessToken", response.data.access_token); router.push('/')
         } catch (error) {
             console.log(error)
         }

@@ -68,8 +68,8 @@ const navigations: Ref<INavigation[]> = ref([
   },
   {
     id: 3,
-    title: 'Ваш профиль',
-    route: '/',
+    title: 'Авторизация',
+    route: '/login',
     isActive: false
   }
 ])

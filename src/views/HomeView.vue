@@ -1,7 +1,7 @@
 <template>
   <slider-component :events="mainEvents"></slider-component>
   <week-events :week-events="weekEvents"></week-events>
-<!--  <search-events></search-events>-->
+  <search-events :search-events="mainEvents"></search-events>
 </template>
 
 <script setup lang="ts">

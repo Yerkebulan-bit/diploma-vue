@@ -2,7 +2,7 @@
   <div class="login">
     <div class="login__container _container">
       <h1 class="login__title">Login</h1>
-      <form @submit.prevent="loginUser" class="login__form">
+      <form class="login__form">
         <div class="login__item">
           <label for="username">Username</label>
           <input type="text" class="login__input" name="username" v-model="user.username">

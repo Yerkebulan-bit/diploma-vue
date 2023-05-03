@@ -1,6 +1,6 @@
-import type {User} from "@/domain/interfaces/response/user.interface";
+import type {IUser} from "@/domain/interfaces/response/user.interface";
 
 
 export default {
-    setUser:(state: any, user: User) => state.user = user
+    setUser:(state: any, user: IUser) => state.user = user
 }
