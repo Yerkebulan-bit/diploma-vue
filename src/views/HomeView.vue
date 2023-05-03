@@ -1,12 +1,12 @@
 <template>
   <slider-component :events="mainEvents"></slider-component>
   <week-events :week-events="weekEvents"></week-events>
-  <search-events></search-events>
+<!--  <search-events></search-events>-->
 </template>
 
 <script setup lang="ts">
 import WeekEvents from "@/components/week-events/week-events.vue";
-import {computed, onMounted} from "vue";
+import {computed, onBeforeMount, onMounted} from "vue";
 import axios from "axios";
 import SliderComponent from "@/components/slider/slider-component.vue";
 import {useStore} from "vuex";
@@ -22,8 +22,8 @@ const weekEvents = computed(() => {
 const fetchMainEvents = await store.dispatch('mainEvents/fetchMainEvents')
 const fetchWeekEvents = await store.dispatch('weekEvents/fetchWeekEvent')
 
-onMounted(async () => {
+onBeforeMount(async () => {
   await fetchMainEvents()
-  console.log(mainEvents)
+  await fetchWeekEvents()
 })
 </script>

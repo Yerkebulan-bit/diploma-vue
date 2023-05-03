@@ -1,15 +1,13 @@
 <template>
-  <div class="event-details">
+  <div class="event-details">{{ event }}
     <div class="event-detail__main event-main">
       <div class="event-main__container _container">
         <div class="event-main__info">
           <div class="event-main__genre">
             FOOD FESTIVAL
           </div>
-          <div class="event-main__name">Brewery Tour And Tasting at Brewery Lemke</div>
-          <div class="event-main__description">
-            Every year the world comes to SXM Festival for a magical gathering like no other. Take off on an adventure through secluded beaches, stunning villas, boats and beach clubs. Party from sunrise to sunset to sunrise again. Connect with friends - old and new- and create unforgettable moments moving to the beat of your favorite House and Techno Artists, from superstar DJs to red hot new talent.
-          </div>
+          <div class="event-main__name">{{event.name}}</div>
+          <div class="event-main__description">{{event.shortDescription}}</div>
         </div>
         <div class="event-main__rating">
           <i class="fa fa-star"></i>
@@ -19,11 +17,11 @@
           <i class="fa fa-star grey"></i>
         </div>
         <div class="event-main__action">
-          <div class="event-main__icon">16+</div>
+          <div class="event-main__icon">{{ event.constraints }}</div>
           <div class="event-main__statistics">
             <div class="event-main__item">
               <div class="event-main__number">Location</div>
-              <span>Almaty city, Nazarbayeva street, 104</span>
+              <span>{{ event.location }}</span>
             </div>
           </div>
         </div>
@@ -41,18 +39,14 @@
             <div class="event-synopsis__info">
               <div class="event-synopsis__name">The description</div>
               <div class="event-synopsis__description">
-                <p>During the 2-hour guided tour through our brewery in Berlin-Mitte, we will show you how much work, but also the spirit of research and invention are behind the brewing process. You will follow the path of the beer from the brewhouse to bottling. You'll get a brief overview of the history of beer brewing and learn about the Craft Beer movement.</p>
-                <p>Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius.
-                  Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium
-                  lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram,
-                  anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta
-                  decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in
-                  futurum.</p>
+                {{ event.description }}
               </div>
               <ul class="event-synopsis__additional-info">
-                <li><span>ORGANIZER</span>John Doe</li>
-                <li><span>STARRING</span>James Hewitt, Jess Richards</li>
-                <li><span>RUNNING TIME</span>100 mins</li>
+                <li><span>ORGANIZER</span>{{ event.organization.name }}</li>
+                <li><span>PHONE NUMBER</span>{{event.organization.phone}}</li>
+                <li><span>EMAIL</span>{{event.organization.email}}</li>
+                <li><span>WEBSITE</span>{{event.organization.site}}</li>
+                <li><span>ADDRESS</span>{{event.organization.address}}</li>
               </ul>
               <ul class="event-synopsis__social">
                 <li>

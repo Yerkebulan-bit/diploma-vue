@@ -3,8 +3,8 @@
     <div class="poster__image _ibg">
 <!--      <img src="./img/posters/poster_1.jpg" alt="">-->
       <div class="poster__additional-info">
-        <router-link to="" class="poster__btn"><i class="fa fa-play"></i></router-link>
-        <a href="movie.html" class="poster__more-info">Show more</a>
+        <router-link :to="`event/${event.id}`" class="poster__btn"><i class="fa fa-play"></i></router-link>
+        <router-link :to="`event/${event.id}`" href="movie.html" class="poster__more-info">Show more</router-link>
         <div class="poster__release-date">
           {{ formatDate(event.startedAt) + ' ' + event.time}}</div>
       </div>

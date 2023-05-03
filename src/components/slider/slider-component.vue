@@ -1,7 +1,7 @@
 <template>
   <div class="main-slider">
     <swiper-container class="main-slider__body _swiper">
-      <swiper-slide class="main-slider__slide" v-for="(event, index) in events" :key="index">
+      <swiper-slide class="main-slider__slide" v-for="event in events" :key="event.id" :style="{}">
         <div class="main-slider__content _container">
           <div class="main-slider__info">
             <div class="main-slider__genre">
@@ -12,7 +12,7 @@
           </div>
           <div class="main-slider__action">
             <div class="main-slider__icon">{{ event.constraints }}</div>
-            <router-link :to="`event-detail-${index}`" class="main-slider__button">
+            <router-link :to="`event/${event.id}`" class="main-slider__button">
               <i class="fa fa-play"></i> Preview
             </router-link>
           </div>

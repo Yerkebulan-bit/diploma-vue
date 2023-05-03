@@ -2,25 +2,42 @@
   <div class="login">
     <div class="login__container _container">
       <h1 class="login__title">Login</h1>
-      <form action="" class="login__form">
+      <form @submit.prevent="loginUser" class="login__form">
         <div class="login__item">
-          <label for="">Email</label>
-          <input type="text" class="login__input">
+          <label for="username">Username</label>
+          <input type="text" class="login__input" name="username" v-model="user.username">
         </div>
         <div class="login__item">
-          <label for="">Password</label>
-          <input type="text" class="login__input">
+          <label for="password">Password</label>
+          <input type="password" class="login__input" name="password" v-model="user.password">
         </div>
         <div class="login__item">
-          <div class="login__button">
-            <input type="submit" value="Login">
-          </div>
+          <button class="login__button">
+            Login
+          </button>
           <router-link to="/registration" class="login__button">Register</router-link>
         </div>
       </form>
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import type {IUserToLogin} from "@/domain/interfaces/response/user-to-login.interface";
+import type {Ref} from "vue";
+import {ref} from "vue";
+import {useStore} from "vuex";
+
+const store = useStore()
+const user: Ref<IUserToLogin> = ref({
+  grant_type: 'password',
+  username: '',
+  password: '',
+  scope: 'read'
+})
+
+const loginUser = store.dispatch('auth/registerUser', user.value)
+</script>
 
 
 <style scoped>
@@ -62,6 +79,7 @@
   border-color: #fbbd61;
 }
 .login__button {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;

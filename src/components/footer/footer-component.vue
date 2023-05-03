@@ -38,38 +38,38 @@ const navigation: INavigationBlock[] = [
     items: [
       {
         id: 1,
-        title: 'Мы на связи',
+        title: 'Об организации',
         route: '/',
       },
       {
         id: 1,
-        title: 'Мы на связи',
+        title: 'Вопрос/ответ',
         route: '/',
       },
       {
         id: 1,
-        title: 'Мы на связи',
+        title: 'Связаться с нами',
         route: '/',
       }
     ]
   },
   {
     id: 1,
-    title: 'О Нас',
+    title: 'Главная информация',
     items: [
       {
         id: 1,
-        title: 'Мы на связи',
+        title: 'Мероприятия',
         route: '/',
       },
       {
         id: 1,
-        title: 'Мы на связи',
+        title: 'Блог',
         route: '/',
       },
       {
         id: 1,
-        title: 'Мы на связи',
+        title: 'Новости',
         route: '/',
       }
     ]
@@ -101,7 +101,6 @@ const socials: ISocial[] = [
 ]
 
 const imagePath = (imageName: string) => {
-  console.log('Test')
   return new URL(`../../assets/icons/${imageName}.svg`, import.meta.url).href
 }
 </script>

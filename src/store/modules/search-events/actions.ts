@@ -9,7 +9,7 @@ export default {
                     
                 }
             })
-            if(response) commit("setSearchEvents", response)
+            if(response) commit("setSearchEvents", response.data)
         } catch (error) {
             console.log(error)
         }

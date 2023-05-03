@@ -2,7 +2,7 @@
 <div class="page">
   <main class="content">
     <header-component></header-component>
-    <router-view></router-view>
+    <suspense> <router-view></router-view></suspense>
   </main>
   <footer-component></footer-component>
 </div>

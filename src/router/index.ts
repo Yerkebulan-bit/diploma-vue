@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from "@/views/HomeView.vue";
 import LoginView from "@/views/LoginView.vue";
 import RegistrationView from "@/views/RegistrationView.vue";
+import EventView from "@/views/EventView.vue";
+import ContactView from "@/views/ContactView.vue";
 
 
 
@@ -23,7 +25,21 @@ const router = createRouter({
       name: 'registration',
       component: RegistrationView,
     },
-  ]
+    {
+      path: '/event/:id',
+      name: 'event',
+      component: EventView,
+    },
+    {
+      path: '/contact',
+      name: 'contact',
+      component: ContactView,
+    }
+  ],
+  scrollBehavior(to, from, savedPosition) {
+    // always scroll to top
+    return { top: 0 }
+  },
 })
 
 export default router

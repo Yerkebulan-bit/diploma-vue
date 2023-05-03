@@ -9,7 +9,7 @@ export default {
                     'Access-Control-Allow-Origin': '*',
                 }
             })
-            if (response) commit("setMainEvents", response)
+            if (response) commit("setMainEvents", response.data)
         } catch (error) {
             console.log(error)
         }
