@@ -1,3 +1,3 @@
 export enum EventType {
-    GENERAL, SPORT, CULTURAL, FOOD
+    GENERAL = 'Развлечения', SPORT = 'Спорт', CULTURAL = 'Культура', FOOD = 'Еда'
 }

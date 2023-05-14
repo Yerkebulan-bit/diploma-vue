@@ -30,11 +30,15 @@
     margin: 0 0 20px 0;
   }
 }
+.event-search__info{
+  flex: 1 1 100%;
+}
 .event-search__genre {
   font-size: 14px;
   letter-spacing: 2px;
   text-transform: uppercase;
   color: #fbbd61;
+  margin: 0 0 5px 0;
 }
 .event-search__name {
   font-weight: 300;
@@ -84,7 +88,6 @@
   display: flex;
 }
 .event-search__time {
-  cursor: pointer;
   height: 34px;
   display: flex;
   align-items: center;

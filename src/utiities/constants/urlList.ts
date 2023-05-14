@@ -4,7 +4,13 @@ export const urlList = {
     'getSearchEvents': 'https://yerkebulan-diploma.herokuapp.com/event/load-events',
     'getEventDetail': 'https://yerkebulan-diploma.herokuapp.com/event/load-event-detail',
     'registration': 'https://yerkebulan-diploma.herokuapp.com/user/register',
-    'loadUser': 'https://yerkebulan-diploma.herokuapp.com/load-user',
-    'login': 'http://localhost:8081/oauth/token',
-    'getFile': 'https://yerkebulan-diploma.herokuapp.com/event/load-main-event/file/load'
+    'organizationRegistration': 'https://yerkebulan-diploma.herokuapp.com/organization/save-org',
+    'loadUser': 'https://yerkebulan-diploma.herokuapp.com/user/load-user',
+    'login': 'https://yerkebulan-diploma.herokuapp.com/oauth/token',
+    'loginOrg': 'https://yerkebulan-diploma.herokuapp.com/oauth/token',
+    'getFile': 'https://yerkebulan-diploma.herokuapp.com/file/load',
+    'getEventComments': 'https://yerkebulan-diploma.herokuapp.com/comment/load-event-comments',
+    'saveComment': 'https://yerkebulan-diploma.herokuapp.com/comment/save',
+    'followEvent': 'https://yerkebulan-diploma.herokuapp.com/user/follow-event',
+    'unFollowEvent': 'https://yerkebulan-diploma.herokuapp.com/user/unfollow-event',
 }

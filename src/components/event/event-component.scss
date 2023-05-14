@@ -1,9 +1,14 @@
 .poster {
+  display: flex;
+  flex-direction: column;
+
+  align-self: stretch;
   position: relative;
   text-align: center;
   overflow: hidden;
   min-width: 270px;
   max-width: 270px;
+
 }
 @media (max-width: 991.98px) {
   .poster {
@@ -17,8 +22,8 @@
   width: 100%;
   height: 340px;
   margin: 0 0 20px 0;
-  border-radius: 10px;
   cursor: pointer;
+  border-radius: 10px;
 }
 @media (max-width: 991.98px) {
   .poster__image {
@@ -36,6 +41,7 @@
   transition: all 0.5s ease 0s;
   transform: skewX(30deg);
   background: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
 }
 .poster__image:hover::before {
   width: 200%;
@@ -43,14 +49,21 @@
 .poster__image:hover .poster__additional-info {
   opacity: 1;
 }
+.poster__info{
+  flex: 1 ;
+  display: flex;
+  flex-direction: column;
+    justify-content: space-between;
+}
 .poster__name {
+  flex: 1;
   display: block;
   font-size: 18px;
   color: #4a4a4a;
   letter-spacing: 2px;
   font-weight: 300;
   line-height: 1.4em;
-  margin: 0 0 20px 0;
+  margin: 0 0 10px 0;
 }
 @media (max-width: 767.98px) {
   .poster__name {

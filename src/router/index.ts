@@ -1,11 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from "@/views/HomeView.vue";
-import LoginView from "@/views/LoginView.vue";
-import RegistrationView from "@/views/RegistrationView.vue";
-import EventView from "@/views/EventView.vue";
-import ContactView from "@/views/ContactView.vue";
-
-
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -13,28 +6,43 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView,
+        component: () => import('@/views/HomeView.vue'),
     },
     {
       path: '/login',
       name: 'login',
-      component: LoginView,
+      component: () => import('@/views/LoginView.vue'),
     },
     {
       path: '/registration',
       name: 'registration',
-      component: RegistrationView,
+        component: () => import('@/views/RegistrationView.vue'),
     },
     {
       path: '/event/:id',
       name: 'event',
-      component: EventView,
+        component: () => import('@/views/EventView.vue'),
     },
     {
       path: '/contact',
-      name: 'event',
-      component: ContactView,
+        name: 'contact',
+        component: () => import('@/views/ContactView.vue'),
     },
+    {
+      path: '/events',
+        name: 'events',
+        component: () => import('@/views/EventsView.vue'),
+    },
+    {
+        path: '/profile',
+    name: 'profile',
+    component: () => import('@/views/ProfileView.vue'),
+    },
+{
+    path: '/news',
+    name: 'news',
+    component: () => import('@/views/NewsView.vue'),
+}
   ],
   scrollBehavior(to, from, savedPosition) {
     // always scroll to top

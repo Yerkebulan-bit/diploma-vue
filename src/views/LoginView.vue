@@ -1,21 +1,21 @@
 <template>
   <div class="login">
     <div class="login__container _container">
-      <h1 class="login__title">Login</h1>
-      <form class="login__form">
+      <h1 class="login__title">Авторизация</h1>
+      <form class="login__form" @submit.prevent="loginUser()">
         <div class="login__item">
-          <label for="username">Username</label>
+          <label for="username">Логин</label>
           <input type="text" class="login__input" name="username" v-model="user.username">
         </div>
         <div class="login__item">
-          <label for="password">Password</label>
+          <label for="password">Пароль</label>
           <input type="password" class="login__input" name="password" v-model="user.password">
         </div>
         <div class="login__item">
-          <button class="login__button">
-            Login
+          <button class="login__button" type="submit">
+            Войти
           </button>
-          <router-link to="/registration" class="login__button">Register</router-link>
+          <router-link to="/registration" class="login__button">Зарегистрироваться</router-link>
         </div>
       </form>
     </div>
@@ -29,6 +29,7 @@ import {ref} from "vue";
 import {useStore} from "vuex";
 
 const store = useStore()
+
 const user: Ref<IUserToLogin> = ref({
   grant_type: 'password',
   username: '',
@@ -36,7 +37,14 @@ const user: Ref<IUserToLogin> = ref({
   scope: 'read'
 })
 
-const loginUser = store.dispatch('auth/registerUser', user.value)
+const loginUser = async () => {
+  await store.dispatch('auth/login', user.value)
+}
+
+
+
+
+
 </script>
 
 

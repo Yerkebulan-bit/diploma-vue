@@ -11,7 +11,9 @@
       </div>
       <div class="header__body">
         <div class="header__logo">
-          <router-link to="/" class="header__logo">Logo</router-link>
+          <router-link to="/" class="header__logo">
+            <img src="../../assets/img/logo/logo-no-background.svg" alt="">
+          </router-link>
         </div>
         <button class="menu__icon icon-menu" @click="openMenu()" :class="{'_active': isOpenMenu}">
           <span></span>
@@ -29,6 +31,13 @@
                   >{{ navigation.title }}</router-link
                 >
               </li>
+              <li>
+                <router-link
+                    :to="isAuth ? '/profile' : '/login'"
+                    class="menu__link"
+                >{{ isAuth ? 'Профиль' : 'Войти' }}</router-link
+                >
+              </li>
             </ul>
             <ul class="menu__social">
               <li v-for="social in socials" :key="social.id">
@@ -44,7 +53,7 @@
 
 <script setup lang="ts">
 import type { INavigation } from '@/domain/interfaces/INavigation.interface'
-import { ref } from 'vue'
+import {computed, ref} from 'vue'
 import type { Ref } from 'vue'
 import type { ISocial } from '@/domain/interfaces/ISocial.interface'
 const navigations: Ref<INavigation[]> = ref([
@@ -57,22 +66,19 @@ const navigations: Ref<INavigation[]> = ref([
   {
     id: 2,
     title: 'Мероприятия',
-    route: '/',
+    route: '/events',
     isActive: false
   },
   {
     id: 3,
     title: 'Новости',
-    route: '/',
+    route: '/news',
     isActive: false
   },
-  {
-    id: 3,
-    title: 'Авторизация',
-    route: '/login',
-    isActive: false
-  }
+
 ])
+
+
 const socials: Ref<ISocial[]> = ref([
   {
     id: 1,
@@ -83,6 +89,8 @@ const socials: Ref<ISocial[]> = ref([
 const isOpenMenu: Ref<boolean> = ref(false)
 
 const openMenu = () => isOpenMenu.value = !isOpenMenu.value
+
+const isAuth = computed(() => localStorage.getItem('access_token'))
 </script>
 
 <style lang="scss">

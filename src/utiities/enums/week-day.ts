@@ -1,10 +1,10 @@
-export enum Day{
-    ALL,
-    MON,
-    TUES,
-    WED,
-    THURS,
-    FRI,
-    SAT,
-    SUN
+export enum WeekDay {
+    ALL = 'Все',
+    MON = 'Понедельник',
+    TUES = 'Вторник',
+    WED = 'Среда',
+    THURS = 'Четверг',
+    FRI = 'Пятница',
+    SAT = 'Суббота',
+    SUN = 'Воскресенье'
 }

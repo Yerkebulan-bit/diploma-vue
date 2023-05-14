@@ -1,5 +1,5 @@
-export interface Comment {
+export interface IComment {
     fullName: string;
     text: string;
-    date: Date;
+    date: any;
 }

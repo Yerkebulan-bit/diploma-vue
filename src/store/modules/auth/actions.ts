@@ -3,40 +3,52 @@ import {urlList} from "@/utiities/constants/urlList";
 import type {IUserToSave} from "@/domain/interfaces/response/user-to-save.interface";
 import router from "@/router";
 import type {IUserToLogin} from "@/domain/interfaces/response/user-to-login.interface";
+import type {IOrganizationToSave} from "@/domain/interfaces/response/organization-to-save.interface";
 
 export default {
     async registerUser({commit}: { commit: Function }, user: IUserToSave) {
         try {
             const response = await axios.post(urlList.registration, user)
-            if (response) commit("setAccessToken", response); router.push('/')
+            if (response) commit("setAccessToken", response); router.push('/profile')
+        } catch (error) {
+            console.log(error)
+        }
+    },
+    async registerOrganization({commit}: { commit: Function }, organization: IOrganizationToSave) {
+        try {
+            const response = await axios.post(urlList.organizationRegistration, organization)
+            if (response) commit("setAccessToken", response); router.push('/profile')
         } catch (error) {
             console.log(error)
         }
     },
     async login({commit}: { commit: Function }, user: IUserToLogin) {
-        console.log(`${urlList.login}?${user.grant_type}&grant_type=${user.grant_type}&username=${user.username}&password=${user.password}&scope=${user.scope}`)
         try {
-            const response = await axios.post(`${urlList.login}?${user.grant_type}&grant_type=${user.grant_type}&username=${user.username}&password=${user.password}&scope=${user.scope}`, {}, {
+            const response = await axios.post(`${urlList.login}?grant_type=${user.grant_type}&username=${user.username}&password=${user.password}&scope=${user.scope}`, {}, {
                 auth: {
                     username: 'client',
                     password: 'secret'
                 }
             })
-            if (response) commit("setAccessToken", response.data.access_token); router.push('/')
+            if (response && response.data.access_token) localStorage.setItem('access_token', response.data.access_token);
+            await router.push('/profile');
         } catch (error) {
             console.log(error)
         }
     },
-    async loadUser({commit}: { commit: Function }, token: string) {
+    async loadUser({commit}: { commit: Function }) {
         try {
+            const access_token = localStorage.getItem('access_token');
             const response = await axios.get(urlList.loadUser, {
                 headers: {
-                    'Authorization': `Basic ${token}`
+                    'Authorization': `Bearer ${access_token}`
                 }
             })
-            if (response) commit("user/setUser", response)
+            if (response) commit("setUser", response.data)
         } catch (error) {
             console.log(error)
         }
     }
+
 }
+

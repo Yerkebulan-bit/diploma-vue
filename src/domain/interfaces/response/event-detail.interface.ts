@@ -6,4 +6,6 @@ export interface IEventDetail extends Event {
     enddate: Date;
     organizationId: string;
     organization: Organization;
+    ytUrl: string;
+    isFollowed: boolean;
 }

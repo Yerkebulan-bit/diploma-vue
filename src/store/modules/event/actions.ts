@@ -6,10 +6,40 @@ export default {
     async fetchEventDetail({commit}: { commit: Function }, id: string) {
         try {
             const response = await axios.get(`${urlList.getEventDetail}/${id}`)
-            console.log(response.data)
             if (response) commit("setEventDetail", response.data);
         } catch (error) {
             console.log(error)
         }
     },
+    async followEvent({commit}: { commit: Function }, payload: any) {
+        try {
+            const accessToken = localStorage.getItem("access_token");
+            const response = await axios.post(`${urlList.followEvent}?userId=${payload.userId}&eventId=${payload.eventId}`, {
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`
+                },
+            }, {
+                auth: {
+                    username: 'client',
+                    password: 'secret'
+                }
+                }
+            )
+        } catch (error) {
+            console.log(error)
+        }
+    },
+    async unFollowEvent({commit}: { commit: Function }, userId: string, eventId: string) {
+        try {
+            const accessToken = localStorage.getItem("access_token");
+            const response = await axios.post(`${urlList.unFollowEvent}?userId=${userId}&eventId=${eventId}`, {
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`
+                }
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
 }
+

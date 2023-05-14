@@ -2,7 +2,7 @@
   <div class="registration">
     <div class="registration__container _container">
       <h1 class="registration__title">Registration</h1>
-      <form @submit.prevent="registerUser()" class="registration__form">
+      <form @submit.prevent="register()" class="registration__form">
         <div class="registration__item">
           <label for="name">Name</label>
           <input type="text" class="registration__input" name="name" v-model="user.name">
@@ -36,6 +36,12 @@
           <input type="text" class="registration__input" name="about" v-model="user.about">
         </div>
         <div class="registration__item">
+          <div class="login__radio" v-for="type in userTypes" >
+            <input type="radio" :id="type.value" :value="type.value" v-model="userType" />
+            <label :for="type.value">{{ type.name }}</label>
+          </div>
+        </div>
+        <div class="registration__item">
           <button class="registration__button" type="submit">
             Registration
           </button>
@@ -52,6 +58,7 @@ import type {IUserToSave} from "@/domain/interfaces/response/user-to-save.interf
 import {ref} from "vue";
 import {useStore} from "vuex";
 import {useRouter} from "vue-router";
+import {IUserType} from "@/domain/interfaces/response/user-type.interface";
 
 const user: Ref<IUserToSave> = ref({
   name: '',
@@ -64,12 +71,31 @@ const user: Ref<IUserToSave> = ref({
   rawPassword: '',
 })
 
+const userTypes: IUserType[] = [
+  {
+    id: 1,
+    name: 'Организация',
+    value: 'organization',
+  },
+  {
+    id: 2,
+    name: 'Клиент',
+    value: 'client',
+  }
+]
+
+const userType: Ref<string> = ref('')
+
 const store = useStore()
 const router = useRouter()
 
 const registerUser = await store.dispatch('auth/registerUser', user.value)
 
+const registerOrganization = await store.dispatch('auth/registerOrganization', user.value)
 
+const register = async () => {
+  userType.value === 'organization' ? await registerOrganization : await registerUser
+}
 </script>
 
 <style scoped>

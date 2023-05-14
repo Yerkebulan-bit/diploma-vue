@@ -1,4 +1,4 @@
-export interface OrganizationToSave {
+export interface IOrganizationToSave {
     id: string;
     name: string;
     address: string;

@@ -7,25 +7,27 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  height: 45px;
+  height: 48px;
   border: solid 1px #d8d8d8;
-  padding: 0 20px;
-  border-radius: 30px;
+  padding: 0 15px;
+  font-size: 16px;
+  transition: all 0.2s ease;
+}
+.schedule__search:focus-within{
+  border: solid 1px #ec7532;
+  outline: none;
 }
 .schedule__search input {
   width: 100%;
 }
 .schedule__search i {
   font-size: 14px;
+  color: #ec7532;
 }
 .schedule .schedule-tabs {
-  padding: 75px 0;
+  padding: 40px 0 70px;
 }
-@media (max-width: 767.98px) {
-  .schedule .schedule-tabs {
-    padding: 40px 0;
-  }
-}
+
 .schedule .schedule-tabs__items {
   display: flex;
   align-items: center;
@@ -35,7 +37,7 @@
 .schedule .schedule-tabs__item {
   position: relative;
   height: 50px;
-  padding: 10px 30px 15px;
+  padding: 10px 25px 15px;
   font-size: 18px;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -71,4 +73,23 @@
 }
 .schedule .schedule-tabs__block._active {
   display: block;
+}
+.schedule__footer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.schedule__btn{
+
+  font-size: 13px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #ec7532;
+  border: 1px solid #ec7532;
+  padding: 10px 15px;
+  transition: all 0.3s ease 0s;
+  &:hover{
+    background: #ec7532;
+    color: #fff;
+  }
 }

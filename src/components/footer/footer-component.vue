@@ -39,12 +39,12 @@ const navigation: INavigationBlock[] = [
       {
         id: 1,
         title: 'Об организации',
-        route: '/',
+        route: '/about',
       },
       {
         id: 1,
         title: 'Вопрос/ответ',
-        route: '/',
+        route: '/faq',
       },
       {
         id: 1,
@@ -60,17 +60,17 @@ const navigation: INavigationBlock[] = [
       {
         id: 1,
         title: 'Мероприятия',
-        route: '/',
+        route: '/events',
       },
       {
         id: 1,
         title: 'Блог',
-        route: '/',
+        route: '/blog',
       },
       {
         id: 1,
         title: 'Новости',
-        route: '/',
+        route: '/news',
       }
     ]
   },
