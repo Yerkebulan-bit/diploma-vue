@@ -1,7 +1,8 @@
 <template>
   <slider-component :events="mainEvents"></slider-component>
   <week-events :week-events="weekEvents"></week-events>
-  <search-events :search-events="events" @inputSearch="changeFilterSearch" @selectWeekDay="changeDayFilter" :filters="filters" :is-show-more="true"></search-events>
+  <events-component :filters="filters" :events="events" @inputSearch="changeFilterSearch" @selectWeekDay="changeDayFilter" :is-show-more="true"></events-component>
+<!--  <search-events :searchEvents="events" @inputSearch="changeFilterSearch" @selectWeekDay="changeDayFilter" :filters="filters" :is-show-more="true"></search-events>-->
 </template>
 
 <script setup lang="ts">
@@ -13,6 +14,7 @@ import type { Ref } from 'vue'
 import SearchEvents from "@/components/search-events/search-events.vue";
 import type {IEvent} from "@/domain/interfaces/response/event.interface";
 import type {IFilters} from "@/domain/interfaces/response/filters.interface";
+import EventsComponent from "@/components/events-component/events-component.vue";
 
 const store = useStore()
 const mainEvents = computed(() => store.getters["mainEvents/getMainEvent"])
@@ -25,12 +27,24 @@ const filters: Ref<IFilters> = ref({
   day: "ALL",
 })
 
-const fetchMainEvents = await store.dispatch('mainEvents/fetchMainEvents')
-const fetchWeekEvents = await store.dispatch('weekEvents/fetchWeekEvent')
-const searchEvents = await store.dispatch('searchEvents/searchEvents', filters.value)
+const fetchMainEvents = async () => {
+  await store.dispatch('mainEvents/fetchMainEvents')
+}
+const fetchWeekEvents = async () => {
+  await store.dispatch('weekEvents/fetchWeekEvent')
+}
+const searchEvents = async () => {
+  await store.dispatch('searchEvents/searchEvents', filters.value)
+}
 const fetchMainEventsImages = async () => {
   if (mainEvents.value) {
     mainEvents.value.forEach(async (event: IEvent) => await store.dispatch('file/fetchFile', event.imageId))
+  }
+}
+
+const fetchEventsImages = async () => {
+  if (events.value) {
+    events.value.forEach(async (event: IEvent) => await store.dispatch('file/fetchFile', event.imageId))
   }
 }
 
@@ -45,9 +59,10 @@ const changeDayFilter = async (day: string) => {
 }
 
 onBeforeMount( async () => {
-  await fetchMainEventsImages()
   await fetchMainEvents()
   await fetchWeekEvents()
-  await searchEvents()
+   await searchEvents()
+  await fetchMainEventsImages()
+  await fetchEventsImages()
 })
 </script>

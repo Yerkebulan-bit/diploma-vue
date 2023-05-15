@@ -15,14 +15,11 @@ export default {
         try {
             const accessToken = localStorage.getItem("access_token");
             const response = await axios.post(`${urlList.followEvent}?userId=${payload.userId}&eventId=${payload.eventId}`, {
+
+            }, {
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
                 },
-            }, {
-                auth: {
-                    username: 'client',
-                    password: 'secret'
-                }
                 }
             )
         } catch (error) {

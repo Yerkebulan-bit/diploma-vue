@@ -7,7 +7,7 @@
       </div>
       <div class="schedule__tabs schedule-tabs">
         <nav class="schedule-tabs__items">
-          <button class="schedule-tabs__item" v-for="(value, key) in WeekDay" :class="{_active: key === filters.day}" @click="$emit('selectWeekDay', key)">
+          <button class="schedule-tabs__item" v-for="(value, key) in WeekDay" :class="{_active: key.toString() === filters.day}" @click="$emit('selectWeekDay', key)">
             {{value}}
           </button>
         </nav>
@@ -26,17 +26,15 @@
 </template>
 
 <script setup lang="ts">
-import type {PropType} from "vue";
 import type {IEvent} from "@/domain/interfaces/response/event.interface";
+import type {PropType} from "vue";
 import EventSearch from "@/components/event-search/event-search.vue";
-import {defineProps, ref, watch} from "vue";
+import type {IFilters} from "@/domain/interfaces/response/filters.interface";
+import {ref} from "vue";
 import type { Ref } from 'vue'
 import {WeekDay} from "@/utiities/enums/week-day";
-import type {IFilters} from "@/domain/interfaces/response/filters.interface";
-import router from "../../router";
-
 const props = defineProps({
-  events: {
+events: {
     type: Array as PropType<IEvent[]>,
     required: true
   },
@@ -51,12 +49,8 @@ const props = defineProps({
 })
 
 const searchValue: Ref<string> = ref('')
-
-watch(() => props.filters, () => {
-  searchValue.value = props.filters.search
-})
 </script>
 
-<style lang="scss">
-@import "search-events";
+<style scoped>
+
 </style>

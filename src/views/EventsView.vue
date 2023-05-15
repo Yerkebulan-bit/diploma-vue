@@ -6,7 +6,7 @@
     </div>
   </div>
  <div class="all-events">
-   <search-events :search-events="events" @inputSearch="changeFilterSearch" @selectWeekDay="changeDayFilter" :filters="filters"></search-events>
+   <events-component :events="events" @inputSearch="changeFilterSearch" @selectWeekDay="changeDayFilter" :filters="filters"></events-component>
  </div>
   <div class="contact-us">
     <h2 class="contact-us__text">Нужна помощь? Свяжитесь с нами!</h2>
@@ -20,6 +20,7 @@ import {useStore} from "vuex";
 import {computed, onBeforeMount, ref} from "vue";
 import type {IFilters} from "@/domain/interfaces/response/filters.interface";
 import type { Ref } from 'vue'
+import EventsComponent from "@/components/events-component/events-component.vue";
 
 const store = useStore()
 

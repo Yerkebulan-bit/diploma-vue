@@ -28,7 +28,7 @@
           <h2 class="event-synopsis__title">Информация</h2>
           <div class="event-synopsis__body">
             <div class="event-synopsis__video">
-              <iframe :src="event.ytUrl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <iframe width="560" height="315" :src="getYoutubeLink" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
 
             <div class="event-synopsis__info">
@@ -113,7 +113,7 @@ import {EventType} from "../../utiities/enums/event-type";
 import {randomRating} from "@/utiities/functions/randomRating";
 import type {IComment} from "@/domain/interfaces/response/comment.interface";
 import {formatDate} from "../../utiities/functions/formatDate";
-import {ref} from "vue";
+import {computed, ref} from "vue";
 
 const props = defineProps({
   event: {
@@ -131,7 +131,9 @@ const props = defineProps({
 })
 
 const newComment: Ref<string> = ref('')
-
+const getYoutubeLink = computed(() => {
+  return props.event.ytUrl.replace('watch?v=', 'embed/')
+})
 const isAuthUser: Ref<boolean> = ref(localStorage.getItem('access_token') ? true : false)
 const getBackgroundProperty = () => {
   return `background-image: linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('data:image/png;base64,${props.eventImage.img}');`
