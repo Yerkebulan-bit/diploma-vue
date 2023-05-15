@@ -1,4 +1,4 @@
-import type {Day} from "@/utiities/enums/week-day";
+
 import type {EventType} from "@/utiities/enums/event-type";
 
 export interface EventToSave {
@@ -10,10 +10,10 @@ export interface EventToSave {
     runningTime: number;
     constraints: string;
     imageId: string;
-    startedAt: Date;
+    startedAt: string;
     description: string;
     location: string;
     endedAt: Date;
     organizationId: string;
-    day: Day;
+    day: string;
 }

@@ -29,10 +29,10 @@ export default {
             console.log(error)
         }
     },
-    async unFollowEvent({commit}: { commit: Function }, userId: string, eventId: string) {
+    async unFollowEvent({commit}: { commit: Function }, payload: any) {
         try {
             const accessToken = localStorage.getItem("access_token");
-            const response = await axios.post(`${urlList.unFollowEvent}?userId=${userId}&eventId=${eventId}`, {
+            const response = await axios.post(`${urlList.unFollowEvent}?userId=${payload.userId}&eventId=${payload.eventId}`, {
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
                 }

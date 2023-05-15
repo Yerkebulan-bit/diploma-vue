@@ -3,7 +3,7 @@
     <div class="event-detail__main event-main" :style="getBackgroundProperty()">
       <div class="event-main__container _container">
         <div class="event-main__info">
-          <div class="event-main__genre">{{ EventType[event.type] }}</div>
+          <div class="event-main__genre"></div>
           <div class="event-main__name">{{event.name}}</div>
           <div class="event-main__description">{{event.shortDescription}}</div>
         </div>

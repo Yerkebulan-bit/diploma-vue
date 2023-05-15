@@ -58,7 +58,7 @@ import type {IUserToSave} from "@/domain/interfaces/response/user-to-save.interf
 import {ref} from "vue";
 import {useStore} from "vuex";
 import {useRouter} from "vue-router";
-import {IUserType} from "@/domain/interfaces/response/user-type.interface";
+
 
 const user: Ref<IUserToSave> = ref({
   name: '',
@@ -71,7 +71,7 @@ const user: Ref<IUserToSave> = ref({
   rawPassword: '',
 })
 
-const userTypes: IUserType[] = [
+const userTypes: any[] = [
   {
     id: 1,
     name: 'Организация',
