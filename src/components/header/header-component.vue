@@ -4,7 +4,7 @@
       <div class="header__contact">
         <a href="tel:+77002871565" class="header__phone">
           <span class="header__icon">
-            <img src="../../assets/icons/phone.svg" alt="">
+            <img src="../../assets/icons/phone.svg" alt="" />
           </span>
           +7 700 287 1565
         </a>
@@ -12,15 +12,15 @@
       <div class="header__body">
         <div class="header__logo">
           <router-link to="/" class="header__logo">
-            <img src="../../assets/img/logo/logo-no-background.svg" alt="">
+            <img src="../../assets/img/logo/logo-no-background.svg" alt="" />
           </router-link>
         </div>
-        <button class="menu__icon icon-menu" @click="openMenu()" :class="{'_active': isOpenMenu}">
+        <button class="menu__icon icon-menu" @click="openMenu()" :class="{ _active: isOpenMenu }">
           <span></span>
           <span></span>
           <span></span>
         </button>
-        <div class="header__menu menu" :class="{'_active': isOpenMenu}">
+        <div class="header__menu menu" :class="{ _active: isOpenMenu }">
           <nav class="menu__nav">
             <ul class="menu__list">
               <li v-for="navigation in navigations" :key="navigation.id">
@@ -32,16 +32,19 @@
                 >
               </li>
               <li>
-                <router-link
-                    :to="isAuth ? '/profile' : '/login'"
-                    class="menu__link"
-                >{{ isAuth ? 'Профиль' : 'Войти' }}</router-link
-                >
+                <router-link :to="isAuth ? '/profile' : '/login'" class="menu__link">{{
+                  isAuth ? 'Профиль' : 'Войти'
+                }}</router-link>
+              </li>
+              <li>
+                <button v-if="isAuth" class="menu__link" @click="logout()">Выйти</button>
               </li>
             </ul>
             <ul class="menu__social">
               <li v-for="social in socials" :key="social.id">
-                <a class="menu__social-link"><span :class="`icon-${social.iconPrefix}` ? social.iconPrefix : ''"></span></a>
+                <a class="menu__social-link"
+                  ><span :class="`icon-${social.iconPrefix}` ? social.iconPrefix : ''"></span
+                ></a>
               </li>
             </ul>
           </nav>
@@ -53,9 +56,10 @@
 
 <script setup lang="ts">
 import type { INavigation } from '@/domain/interfaces/INavigation.interface'
-import {computed, ref} from 'vue'
+import { computed, ref } from 'vue'
 import type { Ref } from 'vue'
 import type { ISocial } from '@/domain/interfaces/ISocial.interface'
+import {useStore} from "vuex";
 const navigations: Ref<INavigation[]> = ref([
   {
     id: 1,
@@ -74,10 +78,8 @@ const navigations: Ref<INavigation[]> = ref([
     title: 'Новости',
     route: '/news',
     isActive: false
-  },
-
+  }
 ])
-
 
 const socials: Ref<ISocial[]> = ref([
   {
@@ -86,11 +88,15 @@ const socials: Ref<ISocial[]> = ref([
     link: 'https://www.instagram.com'
   }
 ])
+
+const store = useStore()
 const isOpenMenu: Ref<boolean> = ref(false)
 
-const openMenu = () => isOpenMenu.value = !isOpenMenu.value
+const openMenu = () => (isOpenMenu.value = !isOpenMenu.value)
 
 const isAuth = computed(() => localStorage.getItem('access_token'))
+
+const logout = () => store.dispatch('auth/logout')
 </script>
 
 <style lang="scss">

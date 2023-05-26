@@ -2,19 +2,17 @@
   <slider-component :events="mainEvents"></slider-component>
   <week-events :week-events="weekEvents"></week-events>
   <events-component :filters="filters" :events="events" @inputSearch="changeFilterSearch" @selectWeekDay="changeDayFilter" :is-show-more="true"></events-component>
-<!--  <search-events :searchEvents="events" @inputSearch="changeFilterSearch" @selectWeekDay="changeDayFilter" :filters="filters" :is-show-more="true"></search-events>-->
 </template>
 
 <script setup lang="ts">
-import WeekEvents from "@/components/week-events/week-events.vue";
 import {computed, onBeforeMount, ref} from "vue";
 import SliderComponent from "@/components/slider/slider-component.vue";
-import {useStore} from "vuex";
 import type { Ref } from 'vue'
-import SearchEvents from "@/components/search-events/search-events.vue";
 import type {IEvent} from "@/domain/interfaces/response/event.interface";
 import type {IFilters} from "@/domain/interfaces/response/filters.interface";
 import EventsComponent from "@/components/events-component/events-component.vue";
+import WeekEvents from "@/components/week-events/week-events.vue";
+import {useStore} from "vuex";
 
 const store = useStore()
 const mainEvents = computed(() => store.getters["mainEvents/getMainEvent"])
@@ -65,4 +63,6 @@ onBeforeMount( async () => {
   await fetchMainEventsImages()
   await fetchEventsImages()
 })
+</script>
+<script setup lang="ts">
 </script>

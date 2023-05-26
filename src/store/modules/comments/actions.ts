@@ -6,7 +6,6 @@ export default {
     async fetchComments({commit}: {commit: Function}, eventId: number) {
         try {
             const response = await axios.get(urlList.getEventComments + '?eventId=' + eventId)
-            console.log(response)
             if(response) commit("setComments", response.data)
         } catch (error) {
             console.log(error)

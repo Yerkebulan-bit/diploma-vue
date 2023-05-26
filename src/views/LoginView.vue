@@ -1,21 +1,45 @@
 <template>
+  <page-header :bg-color="'#000'"></page-header>
   <div class="login">
     <div class="login__container _container">
       <h1 class="login__title">Авторизация</h1>
       <form class="login__form" @submit.prevent="loginUser()">
         <div class="login__item">
           <label for="username">Логин</label>
-          <input type="text" class="login__input" name="username" v-model="user.username">
+          <input
+            type="text"
+            class="login__input"
+            name="username"
+            v-model="user.username"
+            @input="errorInfo.isError = false"
+          />
         </div>
         <div class="login__item">
           <label for="password">Пароль</label>
-          <input type="password" class="login__input" name="password" v-model="user.password">
+          <input
+            type="password"
+            class="login__input"
+            name="password"
+            v-model="user.password"
+            @input="errorInfo.isError = false"
+          />
+        </div>
+        <div class="login__item login__group">
+          <div class="login__radio" v-for="type in userTypes" :key="type.id">
+            <input
+              type="radio"
+              :id="type.value"
+              :value="type.value"
+              v-model="userType"
+              @change="setUserType"
+            />
+            <label class="login__radio-text" :for="type.value">{{ type.name }}</label>
+          </div>
         </div>
         <div class="login__item">
-          <button class="login__button" type="submit">
-            Войти
-          </button>
+          <button class="login__button" type="submit">Войти</button>
           <router-link to="/registration" class="login__button">Зарегистрироваться</router-link>
+          <div class="error-message" v-if="errorInfo.isError">{{ errorInfo.message }}</div>
         </div>
       </form>
     </div>
@@ -23,13 +47,36 @@
 </template>
 
 <script setup lang="ts">
-import type {IUserToLogin} from "@/domain/interfaces/response/user-to-login.interface";
-import type {Ref} from "vue";
-import {ref} from "vue";
-import {useStore} from "vuex";
+import type { IUserToLogin } from '@/domain/interfaces/response/user-to-login.interface'
+import { urlList } from '@/utiities/constants/urlList'
+import type { Ref } from 'vue'
+import { ref } from 'vue'
+import { useStore } from 'vuex'
+import axios from 'axios'
+
+import { useRouter } from 'vue-router'
+import PageHeader from '@/components/page-header/page-header.vue'
 
 const store = useStore()
+const router = useRouter()
+const userTypes: any[] = [
+  {
+    id: 2,
+    name: 'Клиент',
+    value: 'client'
+  },
+  {
+    id: 1,
+    name: 'Организация',
+    value: 'organization'
+  }
+]
 
+const userType: Ref<string> = ref('client')
+const errorInfo: Ref<{ message: string; isError: boolean }> = ref({
+  message: '',
+  isError: false
+})
 const user: Ref<IUserToLogin> = ref({
   grant_type: 'password',
   username: '',
@@ -37,21 +84,49 @@ const user: Ref<IUserToLogin> = ref({
   scope: 'read'
 })
 
+const setUserType = () => store.commit('auth/setUserType', userType.value)
+
 const loginUser = async () => {
-  await store.dispatch('auth/login', user.value)
+  if (!user.value.username || !user.value.password) {
+    errorInfo.value = {
+      message: 'Заполните все поля',
+      isError: true
+    }
+    return
+  }
+  try {
+    const response = await axios.post(
+      `${urlList.login}?grant_type=${user.value.grant_type}&username=${user.value.username}&password=${user.value.password}&scope=${user.value.scope}`,
+      {},
+      {
+        auth: {
+          username: 'client',
+          password: 'secret'
+        }
+      }
+    )
+    if (response && response.data.access_token) {
+      localStorage.setItem('user_type', userType.value)
+      localStorage.setItem('access_token', response.data.access_token)
+       userType.value === 'client'
+        ? router.push('/profile')
+        : router.push('/organization')
+    }
+  } catch (error) {
+    errorInfo.value = {
+      message: 'Неверный логин или пароль',
+      isError: true
+    }
+    console.log(error)
+  }
 }
-
-
-
-
-
 </script>
 
-
-<style scoped>
-.login__container {
+<style scoped lang="scss">
+.login {
   padding: 150px 0;
   max-width: 450px;
+  margin: 0 auto;
 }
 .login__title {
   font-size: 30px;
@@ -127,5 +202,24 @@ const loginUser = async () => {
 .login__button:hover input,
 .login__button:hover i {
   color: #fff;
+}
+.login__group {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+.login__radio {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.login__radio-text {
+  margin-bottom: 0 !important;
+}
+.page-header {
+  padding: 60px 15px;
+  @media (max-width: $mobile + px) {
+    padding: 35px 15px;
+  }
 }
 </style>

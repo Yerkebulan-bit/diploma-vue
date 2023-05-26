@@ -1,8 +1,8 @@
 
 import type {EventType} from "@/utiities/enums/event-type";
 
-export interface EventToSave {
-    id: string;
+export interface IEventToSave {
+    id?: string;
     name: string;
     type: EventType;
     shortDescription: string;
@@ -13,7 +13,7 @@ export interface EventToSave {
     startedAt: string;
     description: string;
     location: string;
-    endedAt: Date;
+    endedAt: string;
     organizationId: string;
     day: string;
 }

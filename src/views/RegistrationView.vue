@@ -1,51 +1,70 @@
 <template>
+  <page-header :bg-color="'#000'"></page-header>
   <div class="registration">
     <div class="registration__container _container">
-      <h1 class="registration__title">Registration</h1>
+      <h1 class="registration__title">Регистрация</h1>
       <form @submit.prevent="register()" class="registration__form">
         <div class="registration__item">
-          <label for="name">Name</label>
-          <input type="text" class="registration__input" name="name" v-model="user.name">
+          <label for="name">Имя</label>
+          <input type="text" class="registration__input" name="name" v-model="form.name" />
+        </div>
+        <div class="registration__item" v-if="userType === 'client'">
+          <label for="surname">Фамилия</label>
+          <input type="text" class="registration__input" name="surname" v-model="form.surname" />
         </div>
         <div class="registration__item">
-          <label for="surname">Surname</label>
-          <input type="text" class="registration__input" name="surname" v-model="user.surname">
+          <label for="email">Почта</label>
+          <input type="email" class="registration__input" name="email" v-model="form.email" />
+        </div>
+        <div class="registration__item" v-if="userType === 'client'">
+          <label for="birth">Дата рождения</label>
+          <input type="date" class="registration__input" name="birth" v-model="form.birth" />
         </div>
         <div class="registration__item">
-          <label for="email">Email</label>
-          <input type="email" class="registration__input" name="email" v-model="user.email">
+          <label for="phone">Номер телефона</label>
+          <input type="text" class="registration__input" name="phone" v-model="form.phone" />
         </div>
         <div class="registration__item">
-          <label for="birth">Date Birth</label>
-          <input type="date" class="registration__input" name="birth" v-model="user.birth">
+          <label for="username">Логин</label>
+          <input type="text" class="registration__input" name="username" v-model="form.username" />
         </div>
         <div class="registration__item">
-          <label for="phone">Phone number</label>
-          <input type="text" class="registration__input" name="phone" v-model="user.phone">
+          <label for="about">Пароль</label>
+          <input type="password" class="registration__input" name="about" v-model="form.password" />
         </div>
         <div class="registration__item">
-          <label for="username">Username</label>
-          <input type="text" class="registration__input" name="username" v-model="user.username">
+          <label for="about">О себе</label>
+          <input type="text" class="registration__input" name="about" v-model="form.about" />
         </div>
-        <div class="registration__item">
-          <label for="password">Password</label>
-          <input type="password" class="registration__input" name="password" v-model="user.rawPassword">
+        <div class="registration__item" v-if="userType === 'organization'">
+          <label for="about">Краткая информация</label>
+          <input
+            type="text"
+            class="registration__input"
+            name="about"
+            v-model="form.shortDescription"
+          />
         </div>
-        <div class="registration__item">
-          <label for="about">About yourself</label>
-          <input type="text" class="registration__input" name="about" v-model="user.about">
+        <div class="registration__item" v-if="userType === 'organization'">
+          <label for="address">Адрес</label>
+          <input type="text" class="registration__input" name="address" v-model="form.address" />
         </div>
-        <div class="registration__item">
-          <div class="login__radio" v-for="type in userTypes" >
+        <div class="registration__item" v-if="userType === 'organization'">
+          <label for="site">Сайт</label>
+          <input type="text" class="registration__input" name="site" v-model="form.site" />
+        </div>
+        <div class="registration__item registration__group">
+          <div class="registration__radio" v-for="type in userTypes" :key="type.id">
             <input type="radio" :id="type.value" :value="type.value" v-model="userType" />
-            <label :for="type.value">{{ type.name }}</label>
+            <label class="registration__radio-text" :for="type.value">{{ type.name }}</label>
           </div>
         </div>
         <div class="registration__item">
-          <button class="registration__button" type="submit">
-            Registration
-          </button>
-          <router-link to="/login" class="registration__button">Login</router-link>
+          <button class="registration__button" type="submit">Зарегистрироваться</button>
+          <router-link to="/login" class="registration__button"
+            >Войти в существуйющий аккаунт</router-link
+          >
+          <div class="error-message" v-if="errorInfo.isError">{{ errorInfo.message }}</div>
         </div>
       </form>
     </div>
@@ -53,14 +72,15 @@
 </template>
 
 <script setup lang="ts">
-import type {Ref} from "vue";
-import type {IUserToSave} from "@/domain/interfaces/response/user-to-save.interface";
-import {ref} from "vue";
-import {useStore} from "vuex";
-import {useRouter} from "vue-router";
+import type { Ref } from 'vue'
+import type { IUserToSave } from '@/domain/interfaces/response/user-to-save.interface'
+import { ref } from 'vue'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
+import type { IOrganizationToSave } from '@/domain/interfaces/response/organization-to-save.interface'
+import PageHeader from '@/components/page-header/page-header.vue'
 
-
-const user: Ref<IUserToSave> = ref({
+const form: Ref<any> = ref({
   name: '',
   surname: '',
   birth: '',
@@ -68,40 +88,74 @@ const user: Ref<IUserToSave> = ref({
   about: '',
   phone: '',
   username: '',
-  rawPassword: '',
+  password: '',
+  shortDescription: '',
+  site: ''
 })
+
+
 
 const userTypes: any[] = [
   {
-    id: 1,
-    name: 'Организация',
-    value: 'organization',
-  },
-  {
     id: 2,
     name: 'Клиент',
-    value: 'client',
+    value: 'client'
+  },
+  {
+    id: 1,
+    name: 'Организация',
+    value: 'organization'
   }
 ]
 
-const userType: Ref<string> = ref('')
+const errorInfo: Ref<{ message: string; isError: boolean }> = ref({
+  message: '',
+  isError: false
+})
+
+const userType: Ref<string> = ref('client')
 
 const store = useStore()
 const router = useRouter()
 
-const registerUser = await store.dispatch('auth/registerUser', user.value)
+const registerUser = async () => {
+  await store.dispatch('auth/registerUser', {
+    name: form.value.name,
+    email: form.value.email,
+    username: form.value.username,
+    phone: form.value.phone,
+    surname: form.value.surname,
+    birth: form.value.birth,
+    about: form.value.about,
+    rawPassword: form.value.password
+  })
+}
 
-const registerOrganization = await store.dispatch('auth/registerOrganization', user.value)
+const registerOrganization = async () => {
+  await store.dispatch('auth/registerOrganization', {
+    name: form.value.name,
+    email: form.value.email,
+    address: form.value.address,
+    username: form.value.username,
+    phone: form.value.phone,
+    shortDescription: form.value.shortDescription,
+    site: form.value.site,
+    imageId: '',
+    description: form.value.about,
+    password: form.value.password
+  })
+}
 
 const register = async () => {
-  userType.value === 'organization' ? await registerOrganization : await registerUser
+  userType.value === 'organization' ? await registerOrganization() : await registerUser()
 }
 </script>
 
-<style scoped>
-.registration__container {
+<style scoped lang="scss">
+.registration {
   padding: 150px 0;
   max-width: 450px;
+  margin: 0 auto;
 }
 .registration__title {
   font-size: 30px;
@@ -178,5 +232,24 @@ const register = async () => {
 .registration__button:hover input,
 .registration__button:hover i {
   color: #fff;
+}
+.registration__group {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+.registration__radio {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.registration__radio-text {
+  margin-bottom: 0 !important;
+}
+.page-header {
+  padding: 60px 15px;
+  @media (max-width: $mobile + px) {
+    padding: 35px 15px;
+  }
 }
 </style>

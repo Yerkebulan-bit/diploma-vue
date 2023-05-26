@@ -1,13 +1,13 @@
 export interface IOrganizationToSave {
     id: string;
     name: string;
-    address: string;
     email: string;
-    shortDescription: string;
+    address: string;
+    username: string;
     phone: string;
+    shortDescription: string;
     site: string;
     description: string;
     imageId: string;
     password: string;
-    username: string;
 }

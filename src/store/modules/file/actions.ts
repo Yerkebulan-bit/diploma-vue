@@ -6,12 +6,10 @@ export default {
     async fetchFile({commit}: { commit: Function }, id: string) {
         try {
             const response = await axios.post(`${urlList.getFile}/${id}`)
-            console.log(response.data)
             if (response) commit("setFile", {
                 id: id,
                 ...response.data
             });
-            console.log(response.data)
         } catch (error) {
             console.log(error)
         }

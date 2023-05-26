@@ -1,7 +1,9 @@
 export default {
     user: {},
+    userType: '',
     organization: {},
-    access_token: ''
+    access_token: '',
+    followedEvents: [],
 }
 
 

@@ -1,0 +1,40 @@
+.tabs{
+  &__items{
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #d8d8d8;
+    flex-wrap: wrap;
+  }
+  &__item{
+    position: relative;
+    height: 50px;
+    padding: 10px 25px 15px;
+    font-size: 18px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 0.3s ease 0s;
+    color: #4a4a4a;
+    cursor: pointer;
+    @media (max-width: $mobile + px) {
+      font-size: 16px;
+      padding: 10px 20px 15px;
+    }
+    &::after{
+      content: "";
+      position: absolute;
+      height: 2px;
+      width: 0;
+      left: 0;
+      bottom: 0;
+      transition: all 0.3s ease 0s;
+      background: linear-gradient(to right, #ec7532 0%, #fbbd61 100%);
+    }
+    &:hover, &._active{
+      color: #ec7532;
+      &::after{
+        width: 100%;
+      }
+    }
+
+  }
+}

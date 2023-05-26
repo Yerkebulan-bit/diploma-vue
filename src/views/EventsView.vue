@@ -1,10 +1,5 @@
 <template>
-  <div class="page-top">
-    <div class="page-top__container _container">
-      <div class="page-top__text">Предстоящие мероприятия</div>
-      <h1 class="page-top__title">Мероприятия недели</h1>
-    </div>
-  </div>
+  <page-header :title="'Мероприятия недели'" :image="'Slide_4.jpg'" :text="'Предстоящие мероприятия'"></page-header>
  <div class="all-events">
    <events-component :events="events" @inputSearch="changeFilterSearch" @selectWeekDay="changeDayFilter" :filters="filters"></events-component>
  </div>
@@ -15,12 +10,12 @@
 </template>
 
 <script setup lang="ts">
-import SearchEvents from "@/components/search-events/search-events.vue";
 import {useStore} from "vuex";
 import {computed, onBeforeMount, ref} from "vue";
 import type {IFilters} from "@/domain/interfaces/response/filters.interface";
 import type { Ref } from 'vue'
 import EventsComponent from "@/components/events-component/events-component.vue";
+import PageHeader from "@/components/page-header/page-header.vue";
 
 const store = useStore()
 

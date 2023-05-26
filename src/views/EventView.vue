@@ -30,7 +30,7 @@ const saveComment = async (comment: string) => {
     userId: user.value.id,
     text: comment
   }
-  console.log(user.value)
+
   await store.dispatch("comments/saveComment", body)
 }
 

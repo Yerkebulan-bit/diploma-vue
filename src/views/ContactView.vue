@@ -1,10 +1,5 @@
 <template>
-  <div class="page-top">
-    <div class="page-top__container _container">
-      <div class="page-top__text">ANY QUESTIONS?</div>
-      <h1 class="page-top__title">Please contact us</h1>
-    </div>
-  </div>
+  <page-header :title="'Please'" :image="'Slide_4.jpg'"></page-header>
   <div class="contact">
     <div class="contact__container _container">
       <div class="contact__body">
@@ -67,39 +62,13 @@
 .contact__container {
   padding: 10px;
 }
-@media (min-width: 767.98px) {
-  .contact__container {
-    margin: -65px auto 0;
-    border-radius: 40px 40px 0 0;
-    background: #fff;
-    overflow: hidden;
-  }
-}
 .contact__map {
   position: relative;
-  overflow: hidden;
   border-radius: 40px 40px 0 0;
   margin: 0 0 60px 0;
   padding-bottom: 40%;
 }
-.contact__map iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-@media (max-width: 767.98px) {
-  .contact__map {
-    border-radius: 0;
-    margin: -10px -10px 40px;
-  }
-}
-@media (max-width: 479.98px) {
-  .contact__map {
-    padding-bottom: 60%;
-  }
-}
+
 .contact__title {
   color: #ec7532;
   flex: 1 1 100%;
@@ -113,7 +82,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    padding: 0 0 75px;
+    padding: 50px 0 75px;
   }
 }
 
@@ -207,34 +176,8 @@
   line-height: 1.42857143;
 }
 
-/*----------------------------------------------------*/
-.page-top {
-  background: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 1)), url(../img/main-slider/Slide_2.jpg);
-}
-.page-top__container {
-  padding: 200px 15px 100px;
-}
-@media (max-width: 767.98px) {
-  .page-top__container {
-    padding: 80px 20px 60px;
-  }
-}
-.page-top__text {
-  font-size: 14px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: #fbbd61;
-}
-.page-top__title {
-  font-size: 52px;
-  font-weight: 300;
-  letter-spacing: 3px;
-  line-height: 1.4em;
-  color: #fff;
-}
-@media (max-width: 767.98px) {
-  .page-top__title {
-    font-size: 35px;
-  }
-}
+
 </style>
+<script setup lang="ts">
+import PageHeader from "@/components/page-header/page-header.vue";
+</script>

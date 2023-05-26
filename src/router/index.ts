@@ -6,48 +6,53 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-        component: () => import('@/views/HomeView.vue'),
+      component: () => import('@/views/HomeView.vue')
     },
     {
       path: '/login',
       name: 'login',
-      component: () => import('@/views/LoginView.vue'),
+      component: () => import('@/views/LoginView.vue')
     },
     {
       path: '/registration',
       name: 'registration',
-        component: () => import('@/views/RegistrationView.vue'),
+      component: () => import('@/views/RegistrationView.vue')
     },
     {
       path: '/event/:id',
       name: 'event',
-        component: () => import('@/views/EventView.vue'),
+      component: () => import('@/views/EventView.vue')
     },
     {
       path: '/contact',
-        name: 'contact',
-        component: () => import('@/views/ContactView.vue'),
+      name: 'contact',
+      component: () => import('@/views/ContactView.vue')
     },
     {
       path: '/events',
-        name: 'events',
-        component: () => import('@/views/EventsView.vue'),
+      name: 'events',
+      component: () => import('@/views/EventsView.vue')
     },
     {
-        path: '/profile',
-    name: 'profile',
-    component: () => import('@/views/ProfileView.vue'),
+      path: '/profile',
+      name: 'profile',
+      component: () => import('@/views/ProfileView.vue')
     },
-{
-    path: '/news',
-    name: 'news',
-    component: () => import('@/views/NewsView.vue'),
-}
+    {
+      path: '/news',
+      name: 'news',
+      component: () => import('@/views/NewsView.vue')
+    },
+    {
+        path: '/organization',
+        name: 'organization',
+        component: () => import('@/views/OrganizationProfileView.vue')
+    }
   ],
   scrollBehavior(to, from, savedPosition) {
     // always scroll to top
     return { top: 0 }
-  },
+  }
 })
 
 export default router

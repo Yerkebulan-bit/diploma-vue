@@ -1,0 +1,22 @@
+.page-header {
+  padding: 200px 15px 100px;
+  @media (max-width: 767.98px) {
+    padding: 80px 20px 60px;
+  }
+  &__text {
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #fbbd61;
+  }
+  &__title {
+    font-size: 52px;
+    font-weight: 300;
+    letter-spacing: 3px;
+    line-height: 1.4em;
+    color: #fff;
+    @media (max-width: 767.98px) {
+      font-size: 35px;
+    }
+  }
+}
