@@ -14,18 +14,12 @@ export default {
     async saveComment({commit}: {commit: Function}, body: ICommentToSave) {
         try {
             const access_token = localStorage.getItem('access_token');
-            const response = await axios.post(urlList.saveComment, {
+            const response = await axios.post(`${urlList.saveComment}?eventId=${body.eventId}&text=${body.text}&userId=${body.userId}`, {
+            }, {
                 headers: {
-                    'Authorization': `Bearer ${access_token}`
-                },
-            },
-                {
-                    params: {
-                        eventId: body.eventId,
-                        text: 'AAAAAA',
-                        userId: body.userId
-                    },
-                })
+                    Authorization: `Bearer ${access_token}`
+                }
+            })
         } catch (error) {
             console.log(error)
         }

@@ -1,8 +1,9 @@
 <template>
 <event-details :event="event" :event-image="eventImage"
-               :comments="comments" @saveComment="saveComment"
+               :comments="comments"
                @followEvent="followEvent()"
                @unFollowEvent="unFollowEvent()"
+               @saveComment="saveComment($event)"
 ></event-details>
 </template>
 
@@ -24,16 +25,6 @@ const fetchEventDetail = async () => {
   await store.dispatch("event/fetchEventDetail", route.params.id)
 }
 
-const saveComment = async (comment: string) => {
-  const body: ICommentToSave = {
-    eventId: event.value.id,
-    userId: user.value.id,
-    text: comment
-  }
-
-  await store.dispatch("comments/saveComment", body)
-}
-
 const fetchEventImage = async () => {
     await store.dispatch('file/fetchFile', event.value.imageId )
 }
@@ -49,6 +40,19 @@ const followEvent = async () => {
 
 const unFollowEvent = async () => {
   await store.dispatch("event/unFollowEvent", {'userId': user.value.id, eventId: event.value.id})
+}
+
+const saveComment = async (text: string) => {
+  if (!user.value) {
+    return
+  }
+  await store.dispatch('comments/saveComment', {
+    eventId: event.value.id,
+    text: text,
+    userId: user.value.id
+  })
+
+  await fetchComments()
 }
 
 onBeforeMount(async () => {

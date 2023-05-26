@@ -90,14 +90,14 @@
         </div>
         <div class="event-comments__form comment-form">
           <h2 class="comment-form__title">Поделитесь своими впечатлениями от мероприятия!</h2>
-          <form @submit.prevent="$emit('saveComment', newComment)">
+          <form @submit.prevent="$emit('saveComment', newComment);newComment = '';name=''; ">
             <div class="comment-form__item">
               <div class="comment-form__text">Добавлять комментарии могут только зарегистрированные пользователи<span>*</span></div>
             </div>
 
             <div class="comment-form__item">
               <label for="">Имя пользователя<span>*</span></label>
-              <input type="text" class="comment-form__input" :disabled="!isAuthUser">
+              <input type="text" v-model="name" class="comment-form__input" :disabled="!isAuthUser">
             </div>
             <div class="comment-form__item">
               <label for="">Комментарий<span>*</span></label>
@@ -121,6 +121,7 @@ import {randomRating} from "@/utiities/functions/randomRating";
 import type {IComment} from "@/domain/interfaces/response/comment.interface";
 import {formatDate} from "../../utiities/functions/formatDate";
 import {computed, ref} from "vue";
+import {useStore} from "vuex";
 
 const props = defineProps({
   event: {
@@ -137,10 +138,13 @@ const props = defineProps({
   }
 })
 
+const store = useStore()
 const newComment: Ref<string> = ref('')
+const name: Ref<string> = ref('')
 const getYoutubeLink = computed(() => {
   return props.event.ytUrl.replace('watch?v=', 'embed/')
 })
+
 const isAuthUser: Ref<boolean> = ref(localStorage.getItem('access_token') ? true : false)
 const getBackgroundProperty = () => {
   return `background-image: linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('data:image/png;base64,${props.eventImage.img}');`
