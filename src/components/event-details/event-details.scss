@@ -322,3 +322,14 @@
   color: #fff;
   background-color: #ec7532;
 }
+.event-main__group {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.event-main__text{
+  font-size: 13px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #fff;
+}

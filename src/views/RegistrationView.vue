@@ -147,6 +147,7 @@ const registerOrganization = async () => {
 }
 
 const register = async () => {
+
   userType.value === 'organization' ? await registerOrganization() : await registerUser()
 }
 </script>

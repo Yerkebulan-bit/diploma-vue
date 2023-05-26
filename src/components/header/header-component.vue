@@ -32,7 +32,7 @@
                 >
               </li>
               <li>
-                <router-link :to="isAuth ? '/profile' : '/login'" class="menu__link">{{
+                <router-link :to="isAuth ? (userType === 'client' ? '/profile' : '/organization') : '/login'" class="menu__link">{{
                   isAuth ? 'Профиль' : 'Войти'
                 }}</router-link>
               </li>
@@ -94,8 +94,8 @@ const isOpenMenu: Ref<boolean> = ref(false)
 
 const openMenu = () => (isOpenMenu.value = !isOpenMenu.value)
 
-const isAuth = computed(() => localStorage.getItem('access_token'))
-
+const isAuth = computed(() => store.state.auth.access_token)
+const userType = computed(() => store.state.auth.userType)
 const logout = () => store.dispatch('auth/logout')
 </script>
 

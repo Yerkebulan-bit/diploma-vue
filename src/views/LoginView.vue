@@ -50,7 +50,7 @@
 import type { IUserToLogin } from '@/domain/interfaces/response/user-to-login.interface'
 import { urlList } from '@/utiities/constants/urlList'
 import type { Ref } from 'vue'
-import { ref } from 'vue'
+import {onMounted, ref} from 'vue'
 import { useStore } from 'vuex'
 import axios from 'axios'
 
@@ -84,6 +84,10 @@ const user: Ref<IUserToLogin> = ref({
   scope: 'read'
 })
 
+onMounted(() => {
+  setUserType()
+})
+
 const setUserType = () => store.commit('auth/setUserType', userType.value)
 
 const loginUser = async () => {
@@ -106,6 +110,7 @@ const loginUser = async () => {
       }
     )
     if (response && response.data.access_token) {
+      store.commit('auth/setAccessToken', response.data.access_token)
       localStorage.setItem('user_type', userType.value)
       localStorage.setItem('access_token', response.data.access_token)
        userType.value === 'client'

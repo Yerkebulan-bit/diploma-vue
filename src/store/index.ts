@@ -10,6 +10,7 @@ import file from "@/store/modules/file";
 import event from "@/store/modules/event";
 import comments from "@/store/modules/comments";
 import filters from "@/store/modules/filters";
+import news from "@/store/modules/news";
 
 export default createStore({
     plugins: [createPersistedState()],
@@ -21,7 +22,8 @@ export default createStore({
         auth,
         event,
         file,
-        comments
+        comments,
+        news
     }
 })
 

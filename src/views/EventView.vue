@@ -1,8 +1,8 @@
 <template>
 <event-details :event="event" :event-image="eventImage"
                :comments="comments" @saveComment="saveComment"
-               @followEvent="followEvent"
-               @unFollowEvent="unFollowEvent"
+               @followEvent="followEvent()"
+               @unFollowEvent="unFollowEvent()"
 ></event-details>
 </template>
 
@@ -44,10 +44,11 @@ const fetchComments = async () => {
 
 const followEvent = async () => {
   await store.dispatch("event/followEvent", {'userId': user.value.id, eventId: event.value.id})
+  await fetchEventDetail()
 }
 
 const unFollowEvent = async () => {
-  await store.dispatch("event/unFollowEvent", user.value.id, event.value.id)
+  await store.dispatch("event/unFollowEvent", {'userId': user.value.id, eventId: event.value.id})
 }
 
 onBeforeMount(async () => {

@@ -1,16 +1,19 @@
 <template>
   <div class="profile">
-    <page-header :title="'Личный кабинет'" :text="'Example'" :image="'Slide_4.jpg'"></page-header>
+    <page-header :title="'Личный кабинет'" :text="`Добро пожаловать ${user.name}!`" :image="'Slide_4.jpg'"></page-header>
     <div class="profile__container _container">
-      <tabs-component :tabs="tabs" @select="selectTab($event)"></tabs-component>
-      <div class="profile__content">
-        <div class="profile__info">
-          <profile-info v-if="selectedTab === 1" :user="user" :is-client="true"></profile-info>
-        </div>
-        <div class="profile__events" v-if="selectedTab === 2">
-          <followed-events :followed-events="followedEvents"></followed-events>
+      <div class="profile__wrapper">
+        <tabs-component :tabs="tabs" @select="selectTab($event)"></tabs-component>
+        <div class="profile__content">
+          <div class="profile__info">
+            <profile-info v-if="selectedTab === 1" :user="user" :is-client="true"></profile-info>
+          </div>
+          <div class="profile__events" v-if="selectedTab === 2">
+            <followed-events :followed-events="followedEvents"></followed-events>
+          </div>
         </div>
       </div>
+
     </div>
   </div>
 </template>
@@ -47,7 +50,7 @@ const tabs: Ref<ITab[]> = ref([
 ])
 
 const store = useStore()
-const user = computed(() => store.state.auth.user)
+const user = computed(() => store.getters['auth/getUser'])
 const followedEvents = computed(() => store.state.auth.followedEvents)
 const selectedTab: Ref<number> = ref(1)
 
@@ -74,7 +77,7 @@ onBeforeMount(async () => {
 
 <style lang="scss">
 .profile {
-  &__container {
+  &__wrapper{
     padding-top: 40px;
     padding-bottom: 80px;
   }

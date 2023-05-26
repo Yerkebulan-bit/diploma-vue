@@ -144,8 +144,9 @@ const event:Ref<any> = ref({
 
 <style scoped lang="scss">
 .add-event {
-
-
+  &__form{
+    max-width: 700px;
+  }
 }
 .add-event__item:not(:last-child) {
   margin: 0 0 23px 0;
@@ -173,7 +174,6 @@ const event:Ref<any> = ref({
   border-color: #fbbd61;
 }
 .add-event__button {
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;

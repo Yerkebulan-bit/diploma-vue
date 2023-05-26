@@ -7,8 +7,8 @@
           <div class="event-main__name">{{event.name}}</div>
           <div class="event-main__description">{{event.shortDescription}}</div>
         </div>
-        <div class="event-main__rating">
-          <i class="fa fa-star" v-for="rate in randomRating()"></i>
+        <div class="event-main__rating" v-if="event.rating">
+          <i class="fa fa-star" v-for="rate in event.rating"></i>
         </div>
         <div class="event-main__action">
           <div class="event-main__icon">{{ event.constraints }}</div>
@@ -19,7 +19,14 @@
             </div>
           </div>
         </div>
-        <button class="event-main__btn" @click="$emit(event.isFollowed ? 'unFollowEvent' : 'followEvent', event.id)">Записаться на мероприятие</button>
+        <div class="event-main__group">
+
+          <button class="event-main__btn" @click="$emit(event.isFollowed ? 'unFollowEvent' : 'followEvent', event.id)">
+            {{ event.isFollowed ? 'Отписаться' : 'Подписаться' }}
+          </button>
+          <div class="event-main__text" v-if="event.isFollowed">Вы успешно подписаны на мероприятие</div>
+        </div>
+
       </div>
     </div>
     <div class="event-detailt__about about-event">

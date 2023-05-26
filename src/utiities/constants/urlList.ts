@@ -19,4 +19,6 @@ export const urlList = {
     'unFollowEvent': 'https://yerkebulan-diploma.herokuapp.com/user/unfollow-event',
     'getFollowedEvents': 'https://yerkebulan-diploma.herokuapp.com/event/load-user-events',
     'saveEvent': 'https://yerkebulan-diploma.herokuapp.com/event/save-event',
+    'getNews': 'https://yerkebulan-diploma.herokuapp.com/news/load-news',
+    'sendMessage': 'https://yerkebulan-diploma.herokuapp.com/feedback/send-message',
 }

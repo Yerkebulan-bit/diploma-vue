@@ -1,29 +1,30 @@
 <template>
-  <page-header :title="'Please'" :image="'Slide_4.jpg'"></page-header>
+  <page-header :title="'Свяжитесь с нами'" :text="'Есть вопросы ?'" :image="'Slide_4.jpg'"></page-header>
   <div class="contact">
     <div class="contact__container _container">
       <div class="contact__body">
-        <h2 class="contact__title">SEND MESSAGE</h2>
-        <form action="" class="contact__form contact-form">
+        <h2 class="contact__title">Отправьте сообщение</h2>
+        <form @submit.prevent="sendFeedback()" class="contact__form contact-form">
           <div class="contact-form__item">
-            <label for="">Name<span>*</span></label>
-            <input type="text" class="contact-form__input">
+            <label for="">Имя<span>*</span></label>
+            <input type="text" v-model="feedback.name" class="contact-form__input">
           </div>
           <div class="contact-form__item">
-            <label for="">Email<span>*</span></label>
-            <input type="email" class="contact-form__input">
+            <label for="">Почта<span>*</span></label>
+            <input type="email" v-model="feedback.email"  class="contact-form__input">
           </div>
           <div class="contact-form__item">
-            <label for="">WHERE DID YOU HEAR ABOUT US?</label>
-            <input type="email" class="contact-form__input">
+            <label for="">Где вы впервые узнали о нас ?</label>
+            <input type="text" v-model="feedback.hearFrom"  class="contact-form__input">
           </div>
           <div class="contact-form__item">
-            <label for="">Message</label>
-            <textarea name="" id="" cols="30" rows="10" class="contact-form__textarea">
+            <label for="">Сообщение</label>
+            <textarea v-model="feedback.message" cols="30" rows="10" class="contact-form__textarea">
                   </textarea>
           </div>
           <div class="contact-form__item">
-            <input type="submit" class="contact-form__button" value="Send">
+            <button class="contact-form__button" type="submit">Отправить</button>
+            <div class="error-message" v-if="errorInfo.isError">{{ errorInfo.message }}</div>
           </div>
         </form>
         <div class="contact__info contact-info">
@@ -56,6 +57,54 @@
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import PageHeader from "@/components/page-header/page-header.vue";
+import type {Ref} from "vue";
+import type {IFeedback} from "@/domain/interfaces/response/feedback.interface";
+import {ref} from "vue";
+import axios from "axios";
+import {urlList} from "@/utiities/constants/urlList";
+
+const feedback: Ref<IFeedback> = ref({
+  name: '',
+  email: '',
+  hearFrom: '',
+  message: '',
+})
+
+const errorInfo: Ref<{ message: string; isError: boolean }> = ref({
+  message: '',
+  isError: false
+})
+
+const sendFeedback = async () => {
+  try {
+    if (!feedback.value.name || !feedback.value.email || !feedback.value.message) {
+      errorInfo.value = {
+        message: 'Заполните все поля',
+        isError: true
+      }
+      return
+    }
+    const response = await axios.post(urlList.sendMessage, feedback.value)
+    if (response.status === 200) {
+      feedback.value = {
+        name: '',
+        email: '',
+        hearFrom: '',
+        message: '',
+      }
+    }
+  } catch (e) {
+    errorInfo.value = {
+      message: 'Произошла ошибка',
+      isError: true
+    }
+    console.log(e)
+  }
+}
+</script>
 
 <style scoped>
 
@@ -178,6 +227,3 @@
 
 
 </style>
-<script setup lang="ts">
-import PageHeader from "@/components/page-header/page-header.vue";
-</script>

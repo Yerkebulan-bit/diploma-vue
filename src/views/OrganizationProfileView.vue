@@ -1,22 +1,25 @@
 <template>
   <div class="profile">
-    <page-header :title="'Личный кабинет'" :text="'Example'" :image="'Slide_4.jpg'"></page-header>
+    <page-header :title="'Личный кабинет'" :text="`Добро пожаловать ${organization.name}!`" :image="'Slide_4.jpg'"></page-header>
     <div class="profile__container _container">
-      <tabs-component :tabs="tabs" @select="selectTab($event)"></tabs-component>
-      <div class="profile__content">
-        <div class="profile__info">
-          <profile-info v-if="selectedTab === 1" :user="organization" :is-client="false"></profile-info>
-        </div>
-        <div class="profile__events" v-if="selectedTab === 2">
-          <div v-if="events.length > 0">
-            <event-search v-for="event in events" :key="event.id" :event="event"></event-search>
+      <div class="profile__wrapper">
+        <tabs-component :tabs="tabs" @select="selectTab($event)"></tabs-component>
+        <div class="profile__content">
+          <div class="profile__info">
+            <profile-info v-if="selectedTab === 1" :user="organization" :is-client="false"></profile-info>
           </div>
-         <div class="profile__text" v-else>Список мероприятиев пуст</div>
-        </div>
-        <div class="profile-add-event" v-if="selectedTab === 3">
-          <add-event @saveEvent="saveEvent($event)"></add-event>
+          <div class="profile__events" v-if="selectedTab === 2">
+            <div v-if="events.length > 0">
+              <event-search v-for="event in events" :key="event.id" :event="event"></event-search>
+            </div>
+            <div class="profile__text" v-else>Список мероприятиев пуст</div>
+          </div>
+          <div class="profile-add-event" v-if="selectedTab === 3">
+            <add-event @saveEvent="saveEvent($event)"></add-event>
+          </div>
         </div>
       </div>
+
     </div>
   </div>
 </template>
@@ -35,7 +38,7 @@ import AddEvent from "@/components/add-event/add-event.vue";
 import type {IEventToSave} from "@/domain/interfaces/response/event-to-save.interface";
 
 const store = useStore()
-const organization = computed(() => store.state.auth.organization)
+const organization = computed(() => store.getters['auth/getOrganization'])
 const events = computed(() => store.state.searchEvents.eventsByOrg)
 const selectedTab: Ref<number> = ref(1)
 const tabs: Ref<ITab[]> = ref([
@@ -53,7 +56,7 @@ const tabs: Ref<ITab[]> = ref([
   },
   {
     id: 3,
-    title: 'Избранное',
+    title: 'Добавить мероприятие',
     isActive: false,
     isDisabled: false
   }
@@ -89,7 +92,7 @@ onBeforeMount(async () => {
 
 <style lang="scss">
 .profile {
-  &__container {
+  &__wrapper {
     padding-top: 40px;
     padding-bottom: 80px;
   }

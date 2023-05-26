@@ -46,8 +46,10 @@ export default {
   },
   logout({ commit }: { commit: Function }) {
     localStorage.removeItem('access_token')
+    commit('setAccessToken', '')
     commit('setUser', {})
     router.push('/')
+
     console.log('Logout')
   },
   async loadUser({ commit }: { commit: Function }) {

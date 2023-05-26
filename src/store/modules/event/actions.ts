@@ -5,7 +5,12 @@ import {urlList} from "@/utiities/constants/urlList";
 export default {
     async fetchEventDetail({commit}: { commit: Function }, id: string) {
         try {
-            const response = await axios.get(`${urlList.getEventDetail}/${id}`)
+            const accessToken = localStorage.getItem("access_token");
+            const response = await axios.get(`${urlList.getEventDetail}/${id}`, {
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`
+                }
+            })
             if (response) commit("setEventDetail", response.data);
         } catch (error) {
             console.log(error)
@@ -29,6 +34,7 @@ export default {
     async unFollowEvent({commit}: { commit: Function }, payload: any) {
         try {
             const accessToken = localStorage.getItem("access_token");
+            console.log(accessToken)
             const response = await axios.post(`${urlList.unFollowEvent}?userId=${payload.userId}&eventId=${payload.eventId}`, {
                 headers: {
                     'Authorization': `Bearer ${accessToken}`

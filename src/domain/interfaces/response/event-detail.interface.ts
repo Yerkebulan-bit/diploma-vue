@@ -10,4 +10,5 @@ export interface IEventDetail extends IEvent {
     organization: IOrganization;
     ytUrl: string;
     isFollowed: boolean;
+    rating: number;
 }
