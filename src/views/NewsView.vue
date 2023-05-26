@@ -1,48 +1,30 @@
 <template>
   <div class="news">
+    <page-header :title="'Новости'" :text="'Следите за самой актуальной информацией'" :image="'Slide_4.jpg'"></page-header>
     <div class="news__container _container">
       <div class="news__body">
         <div class="news__items">
-          <div class="news__item" v-for="newsItem in news" :key="newsItem.id">
+          <div class="news__item">
             <div class="news__image _ibg">
-<!--              <a href=""><img src="./img/news/64c4c6c6-b0a6-11ec-9c59-1edddcf76446.jpg" alt=""></a>-->
+              <img src="../assets/img/main-slider/Slide_2.jpg" alt="">
             </div>
             <div class="news__tags">
-              <a href="" class="news__tag">{{ newsItem.category }}</a>
+              <a href="" class="news__tag">{{ news[0].category }}</a>
             </div>
-            <h2 class="news__title">{{ newsItem.title }}</h2>
-            <div class="news__text">{{ newsItem.content }}</div>
-            <a href="" class="news__see-more">Прочитать полностью</a>
+            <h2 class="news__title">{{ news[0].title }}</h2>
+            <div class="news__text">{{ news[0].content }}</div>
+            <router-link to="/news" class="news__see-more">Прочитать полностью</router-link>
           </div>
-        </div>
-        <div class="news__sidebar news-sidebar">
-          <div class="news-sidebar__search">
-            <input type="text" placeholder="Поиск">
-            <i class="fa fa-search"></i>
-          </div>
-          <div class="news-sidebar__item">
-            <div class="news-sidebar__title">
-              Категория
+          <div class="news__item">
+            <div class="news__image _ibg">
+              <img src="../assets/img/main-slider/Slide_1.jpg" alt="">
             </div>
-            <ul class="news-sidebar__list">
-              <li><a href="">Категория 1</a></li>
-              <li><a href="">Категория 2</a></li>
-              <li><a href="">Категория 3</a></li>
-              <li><a href="">Категория 4</a></li>
-            </ul>
-          </div>
-          <div class="news-sidebar__item">
-            <div class="news-sidebar__title">
-              Теги
+            <div class="news__tags">
+              <a href="" class="news__tag">{{ news[1].category }}</a>
             </div>
-            <ul class="news-sidebar__tags">
-              <li><a href="">ТЕГИ 1</a></li>
-              <li><a href="">ТЕГИ 2</a></li>
-              <li><a href="">ТЕГИ 3</a></li>
-              <li><a href="">ТЕГИ 4</a></li>
-              <li><a href="">ТЕГИ 5</a></li>
-              <li><a href="">ТЕГИ 6</a></li>
-            </ul>
+            <h2 class="news__title">{{ news[1].title }}</h2>
+            <div class="news__text">{{ news[1].content }}</div>
+            <router-link to="/news" class="news__see-more">Прочитать полностью</router-link>
           </div>
         </div>
       </div>
@@ -53,6 +35,8 @@
 <script setup lang="ts">
 import {computed, onBeforeMount} from "vue";
 import {useStore} from "vuex";
+import PageHeader from "@/components/page-header/page-header.vue";
+import type {INews} from "@/domain/interfaces/response/news.interface";
 
 const store = useStore()
 const news = computed(() => store.getters['news/getNews'])
@@ -60,31 +44,36 @@ const getNews = async () => {
   await store.dispatch('news/fetchNews')
 }
 
-onBeforeMount(async () => await getNews())
+const fetchNewsImages = async () => {
+  if (news.value) {
+    news.value.forEach(async (item: INews) => await store.dispatch('file/fetchFile', item.imageId))
+  }
+}
+
+onBeforeMount(async () => {
+  await getNews()
+  await fetchNewsImages()
+})
 </script>
 
 <style lang="scss">
-.news {
-  padding: 75px 0;
-}
+
 @media (max-width: 767.98px) {
-  .news {
+  .news_body {
     padding: 40px 0;
   }
 }
 .news__body {
   display: flex;
   align-items: flex-start;
+  padding: 75px 0;
 }
 @media (max-width: 767.98px) {
   .news__body {
     flex-direction: column-reverse;
   }
 }
-.news__items {
-  flex: 0 0 47%;
-  margin: 0 150px 0 0;
-}
+
 @media (max-width: 991.98px) {
   .news__items {
     margin: 0 80px 0 0;
