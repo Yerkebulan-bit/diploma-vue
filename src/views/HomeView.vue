@@ -2,6 +2,7 @@
   <slider-component :events="mainEvents"></slider-component>
   <week-events :week-events="weekEvents"></week-events>
   <events-component :filters="filters" :events="events" @inputSearch="changeFilterSearch" @selectWeekDay="changeDayFilter" :is-show-more="true"></events-component>
+  <coming-soon :coming-events="events"></coming-soon>
 </template>
 
 <script setup lang="ts">
@@ -13,6 +14,7 @@ import type {IFilters} from "@/domain/interfaces/response/filters.interface";
 import EventsComponent from "@/components/events-component/events-component.vue";
 import WeekEvents from "@/components/week-events/week-events.vue";
 import {useStore} from "vuex";
+import ComingSoon from "@/components/coming-soon/coming-soon.vue";
 
 const store = useStore()
 const mainEvents = computed(() => store.getters["mainEvents/getMainEvent"])

@@ -9,5 +9,6 @@ export interface IEvent {
     imageId: string;
     startedAt: string;
     isMain: boolean;
+    rating: number;
 }
 

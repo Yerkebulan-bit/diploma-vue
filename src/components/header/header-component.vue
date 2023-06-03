@@ -1,53 +1,60 @@
 <template>
-  <header class="header">
+  <header class="header" ref="header" :class="{'_fixed': model.isFixed}">
     <div class="header__container _container">
-      <div class="header__contact">
-        <a href="tel:+77002871565" class="header__phone">
+      <div class="header__top">
+        <a href="tel:+77002618520" class="header__contact">
           <span class="header__icon">
-            <img src="../../assets/icons/phone.svg" alt="" />
+            <i class="icon-phone"></i>
           </span>
-          +7 700 287 1565
+          <span class="header__phone">+ 7 700 261 8520</span>
         </a>
       </div>
-      <div class="header__body">
+      <div class="header__main">
         <div class="header__logo">
-          <router-link to="/" class="header__logo">
-            <img src="../../assets/img/logo/logo-no-background.svg" alt="" />
+          <router-link to="/" class="header__image-wrapper">
+            <img src="@/assets/img/logo/logo-no-background.svg" alt="logo" />
           </router-link>
         </div>
-        <button class="menu__icon icon-menu" @click="openMenu()" :class="{ _active: isOpenMenu }">
+        <div class="header__burger icon-menu" :class="{_active: model.isOpenMenu}" @click="viewModel.toggleMenu()">
           <span></span>
           <span></span>
           <span></span>
-        </button>
-        <div class="header__menu menu" :class="{ _active: isOpenMenu }">
-          <nav class="menu__nav">
-            <ul class="menu__list">
-              <li v-for="navigation in navigations" :key="navigation.id">
+        </div>
+        <div class="header__menu" :class="{_active: model.isOpenMenu}">
+          <nav class="header__nav">
+            <ul class="header__list">
+              <li class="header__item" v-for="item in model.navigation" :key="item.id">
                 <router-link
-                  :to="navigation.route"
-                  :class="{ _active: navigation.isActive }"
-                  class="menu__link"
-                  >{{ navigation.title }}</router-link
+                  :to="item.route"
+                  class="header__link"
+                  :class="{ _active: $route.path === item.route} "
+                  >{{ item.title }}</router-link
                 >
               </li>
-              <li>
-                <router-link :to="isAuth ? (userType === 'client' ? '/profile' : '/organization') : '/login'" class="menu__link">{{
-                  isAuth ? 'Профиль' : 'Войти'
-                }}</router-link>
+              <li class="header__item">
+                <router-link
+                    :to="model.isAuth ? '/profile' : '/login'"
+                    class="header__link"
+                    :class="{ _active: $route.path === '/profile' || $route.path === '/login'} "
+                >{{ model.isAuth ?  'Профиль' : 'Войти'}}</router-link
+                >
               </li>
-              <li>
-                <button v-if="isAuth" class="menu__link" @click="logout()">Выйти</button>
-              </li>
-            </ul>
-            <ul class="menu__social">
-              <li v-for="social in socials" :key="social.id">
-                <a class="menu__social-link"
-                  ><span :class="`icon-${social.iconPrefix}` ? social.iconPrefix : ''"></span
-                ></a>
+              <li class="header__item" v-if="model.isAuth">
+               <button class="header__link" @click="viewModel.logout()">
+                 Выйти
+               </button>
               </li>
             </ul>
           </nav>
+          <div class="header__socials">
+            <div class="header__social" v-for="social in model.socials">
+              <a :href="social.link" class="header__social-link">
+                <span class="header__social-icon">
+                  <i :class="`icon-${social.icon}`"></i>
+                </span>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -55,50 +62,71 @@
 </template>
 
 <script setup lang="ts">
-import type { INavigation } from '@/domain/interfaces/INavigation.interface'
-import { computed, ref } from 'vue'
+import {onBeforeMount, ref} from 'vue'
 import type { Ref } from 'vue'
-import type { ISocial } from '@/domain/interfaces/ISocial.interface'
-import {useStore} from "vuex";
-const navigations: Ref<INavigation[]> = ref([
-  {
-    id: 1,
-    title: 'Главная',
-    route: '/',
-    isActive: true
-  },
-  {
-    id: 2,
-    title: 'Мероприятия',
-    route: '/events',
-    isActive: false
-  },
-  {
-    id: 3,
-    title: 'Новости',
-    route: '/news',
-    isActive: false
-  }
-])
+import { HeaderModel } from '@/components/header/header-model'
+import { HeaderViewModel } from '@/components/header/header-view-model'
 
-const socials: Ref<ISocial[]> = ref([
-  {
-    id: 1,
-    iconPrefix: 'instagram',
-    link: 'https://www.instagram.com'
-  }
-])
+const model: Ref<any> = ref(
+  new HeaderModel({
+    navigation: [
+      {
+        id: 1,
+        title: 'Главная',
+        route: '/',
+        isActive: true
+      },
+      {
+        id: 2,
+        title: 'Мероприятия',
+        route: '/events',
+        isActive: false
+      },
+      {
+        id: 3,
+        title: 'Новости',
+        route: '/news',
+        isActive: false
+      },
+      {
+        id: 4,
+        title: 'Избранное',
+        route: '/favorites',
+        isActive: false
+      },
+    ],
+    socials: [
+      {
+        id: 1,
+        icon: 'instagram',
+        link: 'https://www.instagram.com'
+      },
+      {
+        id: 2,
+        title: 'whatsapp',
+        icon: 'whatsapp',
+        link: 'https://www.whatsapp.com'
+      },
+      {
+        id: 3,
+        title: 'telegram',
+        icon: 'telegram',
+        link: 'https://www.telegram.com'
+      }
+    ]
+  })
+)
+const header: Ref<any> = ref(null)
+const viewModel: Ref<any> = ref(new HeaderViewModel(model.value))
 
-const store = useStore()
-const isOpenMenu: Ref<boolean> = ref(false)
-
-const openMenu = () => (isOpenMenu.value = !isOpenMenu.value)
-
-const isAuth = computed(() => store.state.auth.access_token)
-const userType = computed(() => store.state.auth.userType)
-const logout = () => store.dispatch('auth/logout')
+onBeforeMount(() => {
+  window.addEventListener('scroll', () => {
+    viewModel.value.handleScroll(header.value.clientHeight)
+  })
+})
 </script>
 
 <style lang="scss">
 @import 'header-component';
+//@import "@/assets/style/_ic";
 </style>

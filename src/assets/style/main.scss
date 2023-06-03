@@ -1,6 +1,8 @@
 @import "null";
 @import "common";
 @import "fonts";
+@import "_icons";
+@import "_vars";
 $minWidth: 320;
 
 // Ширина полотна (макета)
@@ -57,5 +59,19 @@ $mobileSmall: 479.98; // Телефоны S
     object-fit: cover;
   }
 }
+
+.dark-yellow-text{
+  color: var(--dark-yellow);
+}
+
+.white-text{
+  color: var(--white);
+}
+
+.grey-text{
+  color: var(--grey);
+}
+
+
 
 

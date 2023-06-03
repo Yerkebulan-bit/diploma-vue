@@ -90,7 +90,7 @@
         </div>
         <div class="event-comments__form comment-form">
           <h2 class="comment-form__title">Поделитесь своими впечатлениями от мероприятия!</h2>
-          <form @submit.prevent="$emit('saveComment', newComment);newComment = '';name=''; ">
+          <form @submit.prevent="$emit('saveComment', newComment);newComment = '';name='' ">
             <div class="comment-form__item">
               <div class="comment-form__text">Добавлять комментарии могут только зарегистрированные пользователи<span>*</span></div>
             </div>

@@ -16,7 +16,7 @@
             <li v-for="social in socials" :key="social.id">
               <a :href="social.link" class="footer__link">
                 <span class="footer__icon">
-                <img :src="imagePath(social.iconPrefix)" alt="">
+                <img :src="imagePath(social.icon)" alt="">
               </span>
               </a>
             </li>
@@ -79,23 +79,23 @@ const navigation: INavigationBlock[] = [
 const socials: ISocial[] = [
   {
     id: 2,
-    iconPrefix: 'facebook',
+    icon: 'facebook',
     link: '/',
   },
   {
     id: 1,
-    iconPrefix: 'instagram',
+    icon: 'instagram',
     link: '/',
   },
 
   {
     id: 3,
-    iconPrefix: 'tiktok',
+    icon: 'tiktok',
     link: '/',
   },
   {
     id: 4,
-    iconPrefix: 'youtube',
+    icon: 'youtube',
     link: '/',
   },
 ]
