@@ -1,5 +1,4 @@
 <template>
-  <page-header :bg-color="'#000'"></page-header>
   <div class="registration">
     <div class="registration__container _container">
       <h1 class="registration__title">Регистрация</h1>

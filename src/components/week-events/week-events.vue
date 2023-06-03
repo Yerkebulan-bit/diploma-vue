@@ -9,19 +9,17 @@
   </div>
 </template>
 
-<style lang="scss">
-@import "week-events";
-</style>
+
 <script setup lang="ts">
 import EventComponent from "@/components/event/event-component.vue";
 import type {PropType} from "vue";
 import type {IEvent} from "@/domain/interfaces/response/event.interface";
 
-
-const props = defineProps({
+defineProps({
   weekEvents: Array as PropType<IEvent[]>
 })
 </script>
 
-
-
+<style lang="scss">
+@import "week-events";
+</style>

@@ -4,7 +4,7 @@
     <header-component></header-component>
     <suspense> <router-view></router-view></suspense>
   </main>
-<!--  <footer-component></footer-component>-->
+  <footer-component></footer-component>
 </div>
 </template>
 

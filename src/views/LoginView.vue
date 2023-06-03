@@ -1,5 +1,4 @@
 <template>
-  <page-header :bg-color="'#000'"></page-header>
   <div class="login">
     <div class="login__container _container">
       <h1 class="login__title">Авторизация</h1>

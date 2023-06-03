@@ -1,11 +1,10 @@
 <template>
-  <page-header :title="'Мероприятия недели'" :image="'Slide_4.jpg'" :text="'Предстоящие мероприятия'"></page-header>
- <div class="all-events">
-   <events-component :events="events" @inputSearch="changeFilterSearch" @selectWeekDay="changeDayFilter" :filters="filters"></events-component>
- </div>
-  <div class="contact-us">
-    <h2 class="contact-us__text">Нужна помощь? Свяжитесь с нами!</h2>
-    <h1 class="contact-us__phone">+7 700 287 1565</h1>
+  <div class="events">
+    <div class="events__container">
+      <page-header :title="'Мероприятия недели'" :image="'Slide_4.jpg'" :text="'Предстоящие мероприятия'"></page-header>
+      <events-component :events="events" @inputSearch="changeFilterSearch" @selectWeekDay="changeDayFilter" :filters="filters"></events-component>
+      <contact-us></contact-us>
+    </div>
   </div>
 </template>
 
@@ -16,6 +15,7 @@ import type {IFilters} from "@/domain/interfaces/response/filters.interface";
 import type { Ref } from 'vue'
 import EventsComponent from "@/components/events-component/events-component.vue";
 import PageHeader from "@/components/page-header/page-header.vue";
+import ContactUs from "@/components/contact-us/contact-us.vue";
 
 const store = useStore()
 
@@ -73,44 +73,6 @@ onBeforeMount( async () => {
 @media (max-width: 767.98px) {
   .page-top__title {
     font-size: 35px;
-  }
-}
-
-.all-events {
-  padding: 50px 10px 0;
-}
-
-
-.contact-us {
-  border-top: 1px solid #d8d8d8;
-  text-align: center;
-  padding: 75px 0;
-}
-.contact-us__text {
-  color: #4a4a4a;
-  font-size: 24px;
-  line-height: 1.4em;
-  letter-spacing: 1px;
-  margin: 0 0 10px 0;
-}
-@media (max-width: 767.98px) {
-  .contact-us__text {
-    font-size: 20px;
-  }
-}
-.contact-us__phone {
-  color: #ec7532;
-  font-size: 46px;
-  line-height: 1.42857143;
-}
-@media (max-width: 767.98px) {
-  .contact-us__phone {
-    font-size: 30px;
-  }
-}
-@media (max-width: 767.98px) {
-  .contact-us {
-    padding: 40px 10px;
   }
 }
 </style>

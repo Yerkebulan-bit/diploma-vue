@@ -70,8 +70,15 @@
 }
 .event-search__bottom {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 10px;
+
+  @media (min-width: $mobile + px) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0;
+  }
 }
 .event-search__schedule {
   display: flex;
@@ -94,9 +101,9 @@
   justify-content: center;
   font-size: 14px;
   padding: 0 10px;
-  color: #717171;
+  color: var(--white);
   border-radius: 5px;
-  background-color: #d8d8d8;
+  background-color: var(--orange);
 }
 .event-search__time:not(:last-child) {
   margin: 0 5px 0 0;
