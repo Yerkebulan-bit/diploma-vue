@@ -3,6 +3,7 @@ import {urlList} from "@/utiities/constants/urlList";
 import {LocalStorageService} from "@/assets/services/local-storage-service";
 
 import {notify} from "@/utiities/functions/notify";
+import {useStore} from "vuex";
 
 export class LoginViewModel {
     model: any
@@ -30,7 +31,7 @@ export class LoginViewModel {
             if (response && response.data.access_token) {
                 LocalStorageService.setItem('access_token', response.data.access_token)
                 this.successLogin()
-                window.location.href = '/profile'
+                window.location.href = '/profile';
             }
         } catch (error) {
             console.log(error)

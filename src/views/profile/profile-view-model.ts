@@ -5,6 +5,7 @@ import type { ITab } from '@/domain/interfaces/ITab.interface'
 import {notify} from "@/utiities/functions/notify";
 import type {IEventToSave} from "@/domain/interfaces/response/event-to-save.interface";
 import type {WeekToSelect} from "@/domain/interfaces/WeekToSelect.interace";
+import {useStore} from "vuex";
 
 export class ProfileViewModel {
   model: any
@@ -106,6 +107,8 @@ export class ProfileViewModel {
       })
       if (response && response.data) {
         this.model.user = response.data
+        const store = useStore();
+        store.commit("auth/setUser", response.data);
       }
     } catch (error) {
       console.log(error)

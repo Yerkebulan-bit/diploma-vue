@@ -40,6 +40,7 @@ const followEvent = async () => {
 
 const unFollowEvent = async () => {
   await store.dispatch("event/unFollowEvent", {'userId': user.value.id, eventId: event.value.id})
+  await fetchEventDetail()
 }
 
 const saveComment = async (text: string) => {
