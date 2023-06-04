@@ -1,0 +1,68 @@
+.accordion {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--grey);
+  transition: all 0.3s ease-in-out;
+  @media (min-width: $tablet + px) {
+    padding: 20px 15px;
+  }
+  &._active {
+    border-color: var(--orange);
+  }
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    &._active {
+      padding: 0 0 20px 0;
+      .accordion__title,
+      .accordion__icon {
+        color: var(--orange);
+      }
+      .accordion__icon {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  &__title {
+    font-size: 18px;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: #4a4a4a;
+    @media (max-width: $mobile + px) {
+      font-size: 16px;
+      font-weight: 300;
+    }
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    font-size: 18px;
+    transition: all 0.3s ease-in-out;
+  }
+
+  &__text {
+    color: #717171;
+    font-size: 16px;
+    line-height: 125%;
+  }
+}
+
+.accordion-enter-active,
+.accordion-leave-active {
+  will-change: height, opacity;
+  transition: height 0.35s ease, opacity 0.35s ease;
+  overflow: hidden;
+}
+
+.accordion-enter-from,
+.accordion-leave-to {
+  height: 0 !important;
+  opacity: 0;
+}

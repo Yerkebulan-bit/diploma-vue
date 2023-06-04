@@ -1,11 +1,11 @@
 <template>
   <div class="main-slider">
-    <swiper-container class="main-slider__body" :slides-per-view="1" speed="450" loop="true" :pagination="{
+    <swiper-container v-if="events?.length > 0" class="main-slider__body" :slides-per-view="1" speed="450" loop="true" :pagination="{
       clickable: true,
       el: '.main-slider__pagination',
     }">
       <swiper-slide class="main-slider__slide" v-for="event in events" :key="event.id" :style="getBackgroundProperty(event.imageId)">
-        <div class="main-slider__content _container">
+        <div class="main-slider__content">
           <div class="main-slider__info">
             <div class="main-slider__genre">
               {{ formatDate(event.startedAt) + ' ' + event.time }}
@@ -22,6 +22,9 @@
         </div>
       </swiper-slide>
     </swiper-container>
+    <div v-else class="skeleton main-slider__skeleton">
+
+    </div>
     <div class="main-slider__pagination _container"></div>
   </div>
 

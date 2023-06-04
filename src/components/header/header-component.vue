@@ -1,5 +1,5 @@
 <template>
-  <header class="header" ref="header" :class="{ _fixed: model.isFixed || $route.path != '/' }">
+  <header class="header" ref="header" :class="{ _fixed: model.isFixed || $route.path === '/login' || $route.path === '/registration' }">
     <div class="header__container _container">
       <div class="header__top">
         <a href="tel:+77002618520" class="header__contact">
@@ -12,12 +12,11 @@
       <div class="header__main">
         <div class="header__logo">
           <router-link to="/" class="header__image-wrapper">
-            <img src="@/assets/img/logo/logo-no-background.svg" alt="logo" />
+            <img src="@/assets/img/logo/logo-no-background.svg" alt="Logo" />
           </router-link>
         </div>
         <div
-          class="header__burger icon-menu"
-          :class="{ _active: model.isOpenMenu }"
+          :class="['header__burger icon-menu', { _active: model.isOpenMenu }]"
           @click="viewModel.toggleMenu()"
         >
           <span></span>
@@ -31,8 +30,7 @@
                 <router-link
                   @click="viewModel.toggleMenu()"
                   :to="item.route"
-                  class="header__link"
-                  :class="{ _active: $route.path === item.route }"
+                  :class="['header__link', { _active: $route.path === item.route }]"
                   >{{ item.title }}</router-link
                 >
               </li>
@@ -40,8 +38,7 @@
                 <router-link
                   @click="viewModel.toggleMenu()"
                   :to="model.isAuth ? '/profile' : '/login'"
-                  class="header__link"
-                  :class="{ _active: $route.path === '/profile' || $route.path === '/login' }"
+                  :class="['header__link', { _active: $route.path === '/profile' || $route.path === '/login' }]"
                   >{{ model.isAuth ? 'Профиль' : 'Войти' }}</router-link
                 >
               </li>
@@ -51,7 +48,7 @@
             </ul>
           </nav>
           <div class="header__socials">
-            <div class="header__social" v-for="social in model.socials">
+            <div class="header__social" v-for="social in model.socials" :key="social.id">
               <a :href="social.link" class="header__social-link">
                 <span class="header__social-icon">
                   <i :class="`icon-${social.icon}`"></i>
@@ -132,5 +129,4 @@ onBeforeMount(() => {
 
 <style lang="scss">
 @import 'header-component';
-//@import "@/assets/style/_ic";
 </style>

@@ -8,7 +8,7 @@
     @selectWeekDay="changeDayFilter"
     :is-show-more="true"
   ></events-component>
-  <coming-soon :coming-events="events"></coming-soon>
+  <coming-soon :coming-events="comingEvents"></coming-soon>
   <contact-us></contact-us>
 </template>
 
@@ -27,6 +27,7 @@ import ContactUs from '@/components/contact-us/contact-us.vue'
 const store = useStore()
 const mainEvents = computed(() => store.getters['mainEvents/getMainEvent'])
 const eventsOfWeek = computed(() => store.getters['weekEvents/getWeekEvents'])
+const comingEvents = computed(() => store.getters['searchEvents/getComingEvents'])
 const events = computed(() => store.getters['searchEvents/getEvents'])
 const filters: Ref<IFilters> = ref({
   offset: 0,
@@ -40,6 +41,10 @@ const fetchMainEvents = async () => {
 }
 const fetchWeekEvents = async () => {
   await store.dispatch('weekEvents/fetchWeekEvent')
+}
+
+const fetchComingEvents = async () => {
+  await store.dispatch('searchEvents/fetchComingEvents')
 }
 const searchEvents = async () => {
   await store.dispatch('searchEvents/searchEvents', filters.value)
@@ -76,6 +81,7 @@ onBeforeMount(async () => {
   await searchEvents()
   await fetchMainEventsImages()
   await fetchEventsImages()
+  await fetchComingEvents()
 })
 </script>
 <script setup lang="ts"></script>

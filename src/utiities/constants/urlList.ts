@@ -21,4 +21,6 @@ export const urlList = {
     'saveEvent': 'https://yerkebulan-diploma.herokuapp.com/event/save-event',
     'getNews': 'https://yerkebulan-diploma.herokuapp.com/news/load-news',
     'sendMessage': 'https://yerkebulan-diploma.herokuapp.com/feedback/send-message',
+    'subscribe': 'https://yerkebulan-diploma.herokuapp.com/email/subscribe',
+    'comingEvents': 'https://yerkebulan-diploma.herokuapp.com/event/load-soon-events',
 }

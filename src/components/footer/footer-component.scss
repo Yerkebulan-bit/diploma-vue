@@ -40,8 +40,11 @@ footer {
   margin: 0 0 10px 0;
 }
 .footer__link {
+  display: flex;
+  align-items: center;
+
+  gap: 4px;
   font-size: 14px;
-  display: inline-block;
   padding: 3px 0;
   letter-spacing: 1.5px;
   color: #fff;
@@ -56,16 +59,46 @@ footer {
 }
 .footer__link span {
   width: 25px;
-  color: rgba(255, 255, 255, 0.3);
 }
-.footer__socials{
+.footer__socials {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.footer__icon {
   display: flex;
   align-items: center;
-  gap: 20px;
+  justify-content: center;
+  font-size: 16px;
+  transition: all 0.3s ease 0s;
+  color: var(--secondary-grey)
 }
-.footer__icon{
-  img{
-    width: 20px;
-    height: 20px;
-  }
+.footer__form {
+  display: flex;
+  align-items: center;
+  margin: 20px 0 0 0;
+  height: 41px;
+}
+.footer__input {
+  flex: 1;
+  font-size: 14px;
+  color: var(--white);
+  height: 100%;
+  padding: 0 15px;
+  background: transparent;
+  border: 1px solid var(--secondary-grey);
+  border-right: none;
+}
+.footer__button {
+  background: #ec7532;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: 0 20px;
+  height: 100%;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
 }

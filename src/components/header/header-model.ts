@@ -1,5 +1,6 @@
 import type {INavigation} from "@/domain/interfaces/INavigation.interface";
 import type {ISocial} from "@/domain/interfaces/ISocial.interface";
+import {LocalStorageService} from "@/assets/services/local-storage-service";
 
 export class HeaderModel {
     navigation: INavigation[]
@@ -16,8 +17,7 @@ export class HeaderModel {
         this.isFixed = object.isFixed || false
     }
 
-
     getAccessToken(): string {
-        return localStorage.getItem('access_token') || ''
+        return LocalStorageService.getItem('access_token') || ''
     }
 }

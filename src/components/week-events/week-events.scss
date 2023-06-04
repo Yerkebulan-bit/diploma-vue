@@ -10,9 +10,29 @@
   margin: 0 0 40px 0;
   color: #ec7532;
 }
+.week-events__content {
+  @media (max-width: $tablet + px) {
+    overflow: auto;
+  }
+}
 .week-events__items {
   display: flex;
-  overflow-x: auto;
+  gap: 30px;
+  @media (min-width: $tablet + px) {
+    flex-wrap: wrap;
+  }
+}
+.week-events__item {
+  @media (min-width: $tablet + px) {
+    flex: 0 1 calc(25% - 30px);
+  }
+
+  .poster {
+    @media (min-width: $tablet + px) {
+      min-width: 100%;
+      max-width: 100%;
+    }
+  }
 }
 .week-events__items::-webkit-scrollbar {
   width: 0;
@@ -28,10 +48,18 @@
   border-bottom: 1px solid #d8d8d8;
 }
 .week-events__title::before {
-  content: "";
+  content: '';
   width: 125px;
   height: 4px;
   position: absolute;
   bottom: 0;
   background: linear-gradient(to right, #ec7532 0%, #fbbd61 100%);
+}
+.week-events__skeleton {
+  display: flex;
+  gap: 30px;
+}
+.week-events__skeleton-block {
+  width: 270px;
+  height: 340px;
 }
