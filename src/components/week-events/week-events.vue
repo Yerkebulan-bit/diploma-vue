@@ -3,7 +3,7 @@
     <div class="week-events__container _container">
       <div class="week-events__title">Мероприятия недели</div>
       <div class="week-events__content">
-        <div class="week-events__items" v-if="weekEvents?.length > 1">
+        <div class="week-events__items" v-if="weekEvents && weekEvents.length > 1">
           <div class="week-events__item" v-for="event in weekEvents">
             <event-component :event="event"></event-component>
           </div>

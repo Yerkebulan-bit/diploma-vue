@@ -1,6 +1,6 @@
 <template>
   <div class="main-slider">
-    <swiper-container v-if="events?.length > 0" class="main-slider__body" :slides-per-view="1" speed="450" loop="true" :pagination="{
+    <swiper-container v-if="events && events.length > 0" class="main-slider__body" :slides-per-view="1" speed="450" loop="true" :pagination="{
       clickable: true,
       el: '.main-slider__pagination',
     }">
