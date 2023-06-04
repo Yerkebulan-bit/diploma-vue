@@ -10,7 +10,7 @@ const props = defineProps({
     required: true
   },
   user: {
-    type: Object as PropType<IUser | IOrganization>,
+    type: Object as PropType<any>,
     required: true
   }
 })
