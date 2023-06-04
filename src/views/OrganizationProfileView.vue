@@ -1,12 +1,21 @@
 <template>
   <div class="profile">
-    <page-header :title="'Личный кабинет'" :text="`Добро пожаловать ${organization.name}!`" :image="'Slide_4.jpg'"></page-header>
+    <page-header
+      :title="'Личный кабинет'"
+      :text="`Добро пожаловать ${organization.name}!`"
+      :image="'Slide_4.jpg'"
+    ></page-header>
     <div class="profile__container _container">
       <div class="profile__wrapper">
-        <tabs-component :tabs="tabs" @select="selectTab($event)"></tabs-component>
+        {{ weekDays }}
+        <tabs-component :tabs="tabs" @select="$emit('selectTab', $event)"></tabs-component>
         <div class="profile__content">
           <div class="profile__info">
-            <profile-info v-if="selectedTab === 1" :user="organization" :is-client="false"></profile-info>
+            <profile-info
+              v-if="selectedTab === 1"
+              :user="organization"
+              :is-client="false"
+            ></profile-info>
           </div>
           <div class="profile__events" v-if="selectedTab === 2">
             <div v-if="events.length > 0">
@@ -15,78 +24,46 @@
             <div class="profile__text" v-else>Список мероприятиев пуст</div>
           </div>
           <div class="profile-add-event" v-if="selectedTab === 3">
-            <add-event @saveEvent="saveEvent($event)"></add-event>
+            <add-event @selectWeekDay="$emit('selectWeekDay', $event)" :week-days="weekDays" @saveEvent="$emit('saveEvent', $event)"></add-event>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useStore } from 'vuex'
-import type { Ref } from 'vue'
-import { computed, onBeforeMount, ref } from 'vue'
-import TabsComponent from '@/components/tabs/tabs-component.vue'
+import type { PropType } from 'vue'
 import type { ITab } from '@/domain/interfaces/ITab.interface'
+import type { IOrganization } from '@/domain/interfaces/response/organization.interface'
+import type { IEvent } from '@/domain/interfaces/response/event.interface'
+import TabsComponent from '@/components/tabs/tabs-component.vue'
 import PageHeader from '@/components/page-header/page-header.vue'
 import ProfileInfo from '@/components/profile-info/profile-info.vue'
-import FollowedEvents from "@/components/followed-events/followed-events.vue";
-import EventSearch from "@/components/event-search/event-search.vue";
-import AddEvent from "@/components/add-event/add-event.vue";
-import type {IEventToSave} from "@/domain/interfaces/response/event-to-save.interface";
-
-const store = useStore()
-const organization = computed(() => store.getters['auth/getOrganization'])
-const events = computed(() => store.state.searchEvents.eventsByOrg)
-const selectedTab: Ref<number> = ref(1)
-const tabs: Ref<ITab[]> = ref([
-  {
-    id: 1,
-    title: 'Данные организации',
-    isActive: true,
-    isDisabled: false
+import AddEvent from '@/components/add-event/add-event.vue'
+import EventSearch from '@/components/event-search/event-search.vue'
+import type {WeekToSelect} from "@/domain/interfaces/WeekToSelect.interace";
+defineProps({
+  selectedTab: {
+    type: Number,
+    required: true
   },
-  {
-    id: 2,
-    title: 'Мероприятия',
-    isActive: false,
-    isDisabled: false
+  tabs: {
+    type: Array as PropType<ITab[]>,
+    required: true
   },
-  {
-    id: 3,
-    title: 'Добавить мероприятие',
-    isActive: false,
-    isDisabled: false
+  organization: {
+    type: Object as PropType<IOrganization>,
+    required: true
+  },
+  events: {
+    type: Array as PropType<IEvent[]>,
+    required: true
+  },
+  weekDays: {
+    type: Array as PropType<WeekToSelect[]>,
+    required: true
   }
-])
-
-const selectTab = (tabId: number) => {
-  tabs.value.forEach((tab) => {
-    tab.isActive = tab.id === tabId
-  })
-  selectedTab.value = tabId
-}
-
-const getOrganization = async () => {
-  await store.dispatch('auth/loadOrganization')
-}
-
-const getEventsByOrg = async () => {
-  await store.dispatch('searchEvents/getEventsByOrg', organization.value.id)
-}
-
-const saveEvent = async (event: IEventToSave) => {
-  await store.dispatch('searchEvents/saveEvent', {
-    ...event,
-    organizationId: organization.value.id
-  })
-}
-
-onBeforeMount(async () => {
-  await getOrganization()
-  await getEventsByOrg()
 })
 </script>
 
@@ -96,10 +73,10 @@ onBeforeMount(async () => {
     padding-top: 40px;
     padding-bottom: 80px;
   }
-  &__content{
+  &__content {
     padding: 60px 0;
   }
-  &__text{
+  &__text {
     font-size: 18px;
     font-weight: 300;
     line-height: 1.4em;

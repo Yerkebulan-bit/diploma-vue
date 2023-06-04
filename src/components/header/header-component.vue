@@ -1,5 +1,5 @@
 <template>
-  <header class="header" ref="header" :class="{ _fixed: model.isFixed || $route.path === '/login' || $route.path === '/registration' }">
+  <header class="header" ref="header" :class="{ _fixed: model.isFixed || $route.path === '/login' || $route.path === '/registration' || $route.path === '/confirm-code'  }">
     <div class="header__container _container">
       <div class="header__top">
         <a href="tel:+77002618520" class="header__contact">

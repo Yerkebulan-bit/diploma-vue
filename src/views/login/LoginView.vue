@@ -2,15 +2,14 @@
   <div class="login">
     <div class="login__container _container">
       <h1 class="login__title">Авторизация</h1>
-      <form class="login__form" @submit.prevent="loginUser()">
+      <form class="login__form" @submit.prevent="viewModel.login()">
         <div class="login__item">
           <label for="username">Логин</label>
           <input
             type="text"
             class="login__input"
             name="username"
-            v-model="user.username"
-            @input="errorInfo.isError = false"
+            v-model="model.username"
           />
         </div>
         <div class="login__item">
@@ -19,14 +18,12 @@
             type="password"
             class="login__input"
             name="password"
-            v-model="user.password"
-            @input="errorInfo.isError = false"
+            v-model="model.password"
           />
         </div>
         <div class="login__item">
           <button class="login__button" type="submit">Войти</button>
           <router-link to="/registration" class="login__button">Зарегистрироваться</router-link>
-          <div class="error-message" v-if="errorInfo.isError">{{ errorInfo.message }}</div>
         </div>
       </form>
     </div>
@@ -34,60 +31,19 @@
 </template>
 
 <script setup lang="ts">
-import type { IUserToLogin } from '@/domain/interfaces/response/user-to-login.interface'
-import { urlList } from '@/utiities/constants/urlList'
 import type { Ref } from 'vue'
-import {ref} from 'vue'
-import { useStore } from 'vuex'
-import axios from 'axios'
+import { ref } from 'vue'
+import { LoginModel } from '@/views/login/login-model'
+import { LoginViewModel } from '@/views/login/login-view-model'
 
-import { useRouter } from 'vue-router'
+const model: Ref<any> = ref(
+  new LoginModel({
+    username: '',
+    password: '',
+  })
+)
 
-const store = useStore()
-const router = useRouter()
-const errorInfo: Ref<{ message: string; isError: boolean }> = ref({
-  message: '',
-  isError: false
-})
-const user: Ref<IUserToLogin> = ref({
-  grant_type: 'password',
-  username: '',
-  password: '',
-  scope: 'read'
-})
-
-const loginUser = async () => {
-  if (!user.value.username || !user.value.password) {
-    errorInfo.value = {
-      message: 'Заполните все поля',
-      isError: true
-    }
-    return
-  }
-  try {
-    const response = await axios.post(
-      `${urlList.login}?grant_type=${user.value.grant_type}&username=${user.value.username}&password=${user.value.password}&scope=${user.value.scope}`,
-      {},
-      {
-        auth: {
-          username: 'client',
-          password: 'secret'
-        }
-      }
-    )
-    if (response && response.data.access_token) {
-      store.commit('auth/setAccessToken', response.data.access_token)
-      localStorage.setItem('access_token', response.data.access_token)
-      window.location.href = '/profile'
-    }
-  } catch (error) {
-    errorInfo.value = {
-      message: 'Неверный логин или пароль',
-      isError: true
-    }
-    console.log(error)
-  }
-}
+const viewModel: Ref<any> = ref(new LoginViewModel(model.value))
 </script>
 
 <style scoped lang="scss">

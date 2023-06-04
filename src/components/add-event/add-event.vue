@@ -1,25 +1,29 @@
 <script setup lang="ts">
-import type {Ref} from "vue";
+import type {PropType, Ref} from "vue";
 import type {IEventToSave} from "@/domain/interfaces/response/event-to-save.interface";
 import {ref} from "vue";
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
+import SelectComponent from "@/components/select-component/select-component.vue";
+import type {WeekToSelect} from "@/domain/interfaces/WeekToSelect.interace";
 
+defineProps({
+  weekDays: Array as PropType<WeekToSelect[]>,
+})
 
-const event:Ref<any> = ref({
+const event:Ref<IEventToSave> = ref({
   name: '',
   type: '',
   shortDescription: '',
   time: '',
   runningTime: '',
   constraints: '',
-  imageId: '',
   startedAt: '',
   description: '',
   location: '',
-  endedAt: '',
-  organizationId: 0,
   day: '',
+  organizationId: '',
 })
-
 
 </script>
 
@@ -55,17 +59,18 @@ const event:Ref<any> = ref({
         </div>
         <div class="add-event__item">
           <label for="username">Время проведения</label>
-          <input
-              type="text"
-              class="add-event__input"
-              name="username"
-              v-model="event.time"
-          />
+<!--          <input-->
+<!--              type="text"-->
+<!--              class="add-event__input"-->
+<!--              name="username"-->
+<!--              v-model="event.time"-->
+<!--          />-->
+          <VueDatePicker v-model="event.time" time-picker />
         </div>
         <div class="add-event__item">
-          <label for="username">Продолжительность</label>
+          <label for="username">Продолжительность (В минутах)</label>
           <input
-              type="text"
+              type="number"
               class="add-event__input"
               name="username"
               v-model="event.runningTime"
@@ -74,29 +79,24 @@ const event:Ref<any> = ref({
         <div class="add-event__item">
           <label for="username">Возрастное ограничение</label>
           <input
-              type="text"
+              type="number"
               class="add-event__input"
               name="username"
               v-model="event.constraints"
           />
         </div>
-        <div class="add-event__item">
-          <label for="username">Идентификатор картинки</label>
-          <input
-              type="text"
-              class="add-event__input"
-              name="username"
-              v-model="event.imageId"
-          />
-        </div>
+<!--        <div class="add-event__item">-->
+<!--          <label for="username">Идентификатор картинки</label>-->
+<!--          <input-->
+<!--              type="text"-->
+<!--              class="add-event__input"-->
+<!--              name="username"-->
+<!--              v-model="event.imageId"-->
+<!--          />-->
+<!--        </div>-->
         <div class="add-event__item">
           <label for="username">Дата проведения</label>
-          <input
-              type="text"
-              class="add-event__input"
-              name="username"
-              v-model="event.startedAt"
-          />
+          <VueDatePicker v-model="event.startedAt" :enable-time-picker="false"></VueDatePicker>
         </div>
         <div class="add-event__item">
           <label for="username">Полное описание</label>
@@ -117,32 +117,18 @@ const event:Ref<any> = ref({
           />
         </div>
         <div class="add-event__item">
-          <label for="username">Время окончания</label>
-          <input
-              type="text"
-              class="add-event__input"
-              name="username"
-              v-model="event.endedAt"
-          />
-        </div>
-        <div class="add-event__item">
           <label for="username">День проведения</label>
-          <input
-              type="text"
-              class="add-event__input"
-              name="username"
-              v-model="event.day"
-          />
+          <select-component v-if="weekDays" @select="$emit('selectWeekDay', $event);event.day = $event" :items="weekDays" :selected-item="weekDays.find(item => item.isActive)">
+          </select-component>
         </div>
         <div class="add-event__item">
           <button class="add-event__button" type="submit">Сохранить</button>
-<!--          <div class="error-message" v-if="errorInfo.isError">{{ errorInfo.message }}</div>-->
         </div>
       </form>
     </div>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 .add-event {
   &__form{
     max-width: 700px;
@@ -196,5 +182,9 @@ const event:Ref<any> = ref({
 .add-event__button:hover input,
 .add-event__button:hover i {
   color: #fff;
+}
+.dp__input{
+  font-family: 'Roboto Condensed';
+  font-size: 14px;
 }
 </style>

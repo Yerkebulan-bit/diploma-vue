@@ -2,59 +2,59 @@
   <div class="registration">
     <div class="registration__container _container">
       <h1 class="registration__title">Регистрация</h1>
-      <form @submit.prevent="register()" class="registration__form">
+      <form @submit.prevent="viewModel.registration()" class="registration__form">
         <div class="registration__item">
           <label for="name">Имя</label>
-          <input type="text" class="registration__input" name="name" v-model="form.name" />
+          <input type="text" class="registration__input" name="name" v-model="model.name" />
         </div>
-        <div class="registration__item" v-if="userType === 'client'">
+        <div class="registration__item" v-if="model.selectedUserType === 'client'">
           <label for="surname">Фамилия</label>
-          <input type="text" class="registration__input" name="surname" v-model="form.surname" />
+          <input type="text" class="registration__input" name="surname" v-model="model.surname" />
         </div>
         <div class="registration__item">
           <label for="email">Почта</label>
-          <input type="email" class="registration__input" name="email" v-model="form.email" />
+          <input type="email" class="registration__input" name="email" v-model="model.email" />
         </div>
-        <div class="registration__item" v-if="userType === 'client'">
+        <div class="registration__item" v-if="model.selectedUserType  === 'client'">
           <label for="birth">Дата рождения</label>
-          <input type="date" class="registration__input" name="birth" v-model="form.birth" />
+          <VueDatePicker v-model="model.birth"></VueDatePicker>
         </div>
         <div class="registration__item">
           <label for="phone">Номер телефона</label>
-          <input type="text" class="registration__input" name="phone" v-model="form.phone" />
+          <input type="tel" class="registration__input" name="phone" v-model="model.phone" />
         </div>
         <div class="registration__item">
           <label for="username">Логин</label>
-          <input type="text" class="registration__input" name="username" v-model="form.username" />
+          <input type="text" class="registration__input" name="username" v-model="model.username" />
         </div>
         <div class="registration__item">
           <label for="about">Пароль</label>
-          <input type="password" class="registration__input" name="about" v-model="form.password" />
+          <input type="password" class="registration__input" name="about" v-model="model.password" />
         </div>
         <div class="registration__item">
           <label for="about">О себе</label>
-          <input type="text" class="registration__input" name="about" v-model="form.about" />
+          <input type="text" class="registration__input" name="about" v-model="model.about" />
         </div>
-        <div class="registration__item" v-if="userType === 'organization'">
+        <div class="registration__item" v-if="model.selectedUserType  === 'organization'">
           <label for="about">Краткая информация</label>
           <input
             type="text"
             class="registration__input"
             name="about"
-            v-model="form.shortDescription"
+            v-model="model.shortDescription"
           />
         </div>
-        <div class="registration__item" v-if="userType === 'organization'">
+        <div class="registration__item" v-if="model.selectedUserType  === 'organization'">
           <label for="address">Адрес</label>
-          <input type="text" class="registration__input" name="address" v-model="form.address" />
+          <input type="text" class="registration__input" name="address" v-model="model.address" />
         </div>
-        <div class="registration__item" v-if="userType === 'organization'">
+        <div class="registration__item" v-if="model.selectedUserType  === 'organization'">
           <label for="site">Сайт</label>
-          <input type="text" class="registration__input" name="site" v-model="form.site" />
+          <input type="text" class="registration__input" name="site" v-model="model.site" />
         </div>
         <div class="registration__item registration__group">
-          <div class="registration__radio" v-for="type in userTypes" :key="type.id">
-            <input type="radio" :id="type.value" :value="type.value" v-model="userType" />
+          <div class="registration__radio" v-for="type in model.userTypes" :key="type.id">
+            <input type="radio" :id="type.value" :value="type.value" v-model="model.selectedUserType" />
             <label class="registration__radio-text" :for="type.value">{{ type.name }}</label>
           </div>
         </div>
@@ -63,7 +63,6 @@
           <router-link to="/login" class="registration__button"
             >Войти в существуйющий аккаунт</router-link
           >
-          <div class="error-message" v-if="errorInfo.isError">{{ errorInfo.message }}</div>
         </div>
       </form>
     </div>
@@ -71,87 +70,36 @@
 </template>
 
 <script setup lang="ts">
-import type { Ref } from 'vue'
-import type { IUserToSave } from '@/domain/interfaces/response/user-to-save.interface'
-import { ref } from 'vue'
-import { useStore } from 'vuex'
-import { useRouter } from 'vue-router'
-import type { IOrganizationToSave } from '@/domain/interfaces/response/organization-to-save.interface'
-import PageHeader from '@/components/page-header/page-header.vue'
 
-const form: Ref<any> = ref({
-  name: '',
-  surname: '',
-  birth: '',
-  email: '',
-  about: '',
-  phone: '',
-  username: '',
-  password: '',
-  shortDescription: '',
-  site: ''
-})
+import type {Ref} from "vue";
+import {ref} from "vue";
+import {RegistrationModel} from "@/views/registration/registration-model";
+import {RegistrationViewModel} from "@/views/registration/registration-view-model";
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
+const model: Ref<any> = ref(new RegistrationModel(
+    {
+      userTypes: [
+        {
+          id: 2,
+          name: 'Клиент',
+          value: 'client'
+        },
+        {
+          id: 1,
+          name: 'Организация',
+          value: 'organization'
+        }
+      ],
+      selectedUserType: 'client',
+    }
+))
 
+const viewModel:Ref<any> = ref(new RegistrationViewModel(model.value))
 
-
-const userTypes: any[] = [
-  {
-    id: 2,
-    name: 'Клиент',
-    value: 'client'
-  },
-  {
-    id: 1,
-    name: 'Организация',
-    value: 'organization'
-  }
-]
-
-const errorInfo: Ref<{ message: string; isError: boolean }> = ref({
-  message: '',
-  isError: false
-})
-
-const userType: Ref<string> = ref('client')
-
-const store = useStore()
-const router = useRouter()
-
-const registerUser = async () => {
-  await store.dispatch('auth/registerUser', {
-    name: form.value.name,
-    email: form.value.email,
-    username: form.value.username,
-    phone: form.value.phone,
-    surname: form.value.surname,
-    birth: form.value.birth,
-    about: form.value.about,
-    rawPassword: form.value.password
-  })
-}
-
-const registerOrganization = async () => {
-  await store.dispatch('auth/registerOrganization', {
-    name: form.value.name,
-    email: form.value.email,
-    address: form.value.address,
-    username: form.value.username,
-    phone: form.value.phone,
-    shortDescription: form.value.shortDescription,
-    site: form.value.site,
-    imageId: '',
-    description: form.value.about,
-    password: form.value.password
-  })
-}
-
-const register = async () => {
-
-  userType.value === 'organization' ? await registerOrganization() : await registerUser()
-}
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .registration {
   padding: 150px 0;
   max-width: 450px;
@@ -251,5 +199,9 @@ const register = async () => {
   @media (max-width: $mobile + px) {
     padding: 35px 15px;
   }
+}
+.dp__input{
+  font-family: 'Roboto Condensed';
+  font-size: 14px;
 }
 </style>

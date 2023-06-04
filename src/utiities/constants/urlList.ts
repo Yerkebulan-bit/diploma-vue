@@ -23,4 +23,6 @@ export const urlList = {
     'sendMessage': 'https://yerkebulan-diploma.herokuapp.com/feedback/send-message',
     'subscribe': 'https://yerkebulan-diploma.herokuapp.com/email/subscribe',
     'comingEvents': 'https://yerkebulan-diploma.herokuapp.com/event/load-soon-events',
+    'verifyCode': 'https://yerkebulan-diploma.herokuapp.com/auth/verify-code',
+    'identifyUserType': 'https://yerkebulan-diploma.herokuapp.com/auth/identify-user-type',
 }

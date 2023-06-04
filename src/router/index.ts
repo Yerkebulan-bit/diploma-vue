@@ -11,12 +11,12 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      component: () => import('@/views/LoginView.vue')
+      component: () => import('@/views/login/LoginView.vue')
     },
     {
       path: '/registration',
       name: 'registration',
-      component: () => import('@/views/RegistrationView.vue')
+      component: () => import('@/views/registration/RegistrationView.vue')
     },
     {
       path: '/event/:id',
@@ -36,7 +36,7 @@ const router = createRouter({
     {
       path: '/profile',
       name: 'profile',
-      component: () => import('@/views/ProfileView.vue')
+      component: () => import('@/views/profile/ProfileView.vue')
     },
     {
       path: '/news',
@@ -53,7 +53,11 @@ const router = createRouter({
       name: 'faqs',
       component: () => import('@/views/FaqsView.vue')
     },
-
+    {
+      path: '/confirm-code',
+      name: 'confirm-code',
+      component: () => import('@/views/confirm-code/confirm-code.vue')
+    }
   ],
   scrollBehavior(to, from, savedPosition) {
     // always scroll to top
