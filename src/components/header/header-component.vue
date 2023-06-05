@@ -89,12 +89,6 @@ const model: Ref<any> = ref(
         route: '/news',
         isActive: false
       },
-      {
-        id: 4,
-        title: 'Избранное',
-        route: '/favorites',
-        isActive: false
-      }
     ],
     socials: [
       {

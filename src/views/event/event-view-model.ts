@@ -24,7 +24,8 @@ export class EventViewModel {
     async getEventDetail(): Promise<void> {
         try {
             const access_token = localStorage.getItem('access_token')
-           const config = access_token ? {
+            const userType = localStorage.getItem('user_type')
+           const config = access_token && userType === 'client' ? {
                 headers: {
                     Authorization: `Bearer ${access_token}`
                 }

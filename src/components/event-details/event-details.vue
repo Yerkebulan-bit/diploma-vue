@@ -24,7 +24,7 @@
           <button class="event-main__btn" @click="$emit(event?.isFollowed ? 'unFollowEvent' : 'followEvent', event.id)">
             {{ event?.isFollowed ? 'Отписаться' : 'Подписаться' }}
           </button>
-          <div class="event-main__text" v-if="event.isFollowed">Вы успешно подписаны на мероприятие</div>
+          <div class="event-main__text" v-if="event?.isFollowed">Вы успешно подписаны на мероприятие</div>
         </div>
 
       </div>

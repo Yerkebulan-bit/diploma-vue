@@ -27,6 +27,7 @@ const event:Ref<IEventToSave> = ref({
   imageId: "8",
   day: 'ALL',
   organizationId: '',
+  ytUrl: '',
   limit: 0,
 })
 
@@ -130,6 +131,15 @@ const uploadFile = (event: any) => {
               class="add-event__input"
               name="limit"
               v-model="event.limit"
+          />
+        </div>
+        <div class="add-event__item">
+          <label for="limit">Ссылка на Youtube</label>
+          <input
+              type="text"
+              class="add-event__input"
+              name="limit"
+              v-model="event.ytUrl"
           />
         </div>
         <div class="add-event__item">

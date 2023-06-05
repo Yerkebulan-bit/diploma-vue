@@ -11,5 +11,6 @@ export interface IEventToSave {
     location: string,
     organizationId: string,
     day: string,
+    ytUrl: string,
     limit: number
 }
