@@ -217,4 +217,6 @@ export class ProfileViewModel {
       console.log(error)
     }
   }
+
+
 }

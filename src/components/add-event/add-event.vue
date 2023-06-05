@@ -16,7 +16,7 @@ defineProps({
 
 const event:Ref<IEventToSave> = ref({
   name: '',
-  type: '',
+  type: 'GENERAL',
   shortDescription: '',
   time: '',
   runningTime: '',
@@ -25,7 +25,7 @@ const event:Ref<IEventToSave> = ref({
   description: '',
   location: '',
   imageId: "8",
-  day: '',
+  day: 'ALL',
   organizationId: '',
   limit: 0,
 })

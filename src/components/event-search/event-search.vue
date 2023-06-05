@@ -1,7 +1,10 @@
 <template>
   <div class="event-search">
-    <router-link :to="`event/${event.id}`" class="event-search__image _ibg">
+    <router-link v-if="getImage(event.id) != ''" :to="`event/${event.id}`" class="event-search__image _ibg">
       <img :src="'data:image/png;base64, ' + getImage(event.imageId)" alt="">
+    </router-link>
+    <router-link :to="`event/${event.id}`" class="event-search__image _ibg">
+      <img src="@/assets/img/main-slider/Slide_1.jpg" alt="">
     </router-link>
     <div class="event-search__info">
       <div class="event-search__genre">{{ EventType.GENERAL }}</div>
