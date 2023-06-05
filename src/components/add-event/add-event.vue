@@ -113,6 +113,15 @@ const event:Ref<IEventToSave> = ref({
           </select-component>
         </div>
         <div class="add-event__item">
+          <label for="username">Изображение</label>
+          <input
+              type="text"
+              class="add-event__input"
+              name="username"
+              v-model="event.location"
+          />
+        </div>
+        <div class="add-event__item">
           <button class="add-event__button" type="submit">Сохранить</button>
         </div>
       </form>

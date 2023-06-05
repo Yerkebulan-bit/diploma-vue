@@ -4,6 +4,7 @@ import {LocalStorageService} from "@/assets/services/local-storage-service";
 
 import {notify} from "@/utiities/functions/notify";
 import {useStore} from "vuex";
+import router from "@/router";
 
 export class LoginViewModel {
     model: any
@@ -28,11 +29,11 @@ export class LoginViewModel {
                     }
                 }
             )
-            if (response && response.data) {
+            if (response && response.data && response.data.access_token) {
                 console.log(response.data)
                localStorage.setItem('access_token', response.data.access_token)
                 this.successLogin()
-                window.location.href = '/profile';
+                await router.push('/profile')
             }
         } catch (error) {
             console.log(error)

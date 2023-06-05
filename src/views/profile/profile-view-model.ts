@@ -29,7 +29,7 @@ export class ProfileViewModel {
 
   async getUserType(): Promise<void> {
     try {
-      const access_token = LocalStorageService.getItem('access_token')
+      const access_token = localStorage.getItem('access_token')
       const response = await axios.get(urlList.identifyUserType, {
         headers: {
           Authorization: `Bearer ${access_token}`
@@ -99,7 +99,7 @@ export class ProfileViewModel {
 
   async getUser() {
     try {
-      const access_token = LocalStorageService.getItem('access_token')
+      const access_token = localStorage.getItem('access_token')
       const response = await axios.get(urlList.loadUser, {
         headers: {
           Authorization: `Bearer ${access_token}`
@@ -116,7 +116,7 @@ export class ProfileViewModel {
 
   async getFollowedEvents() {
     try {
-      const access_token = LocalStorageService.getItem('access_token')
+      const access_token = localStorage.getItem('access_token')
       const response = await axios.get(
         `${urlList.getFollowedEvents}?userId=${this.model.user.id}`,
         {
