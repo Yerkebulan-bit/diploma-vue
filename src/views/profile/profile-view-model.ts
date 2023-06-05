@@ -203,9 +203,13 @@ export class ProfileViewModel {
 
   async uploadImage(image: any) {
     console.log(image)
+
     try {
+      const formData = new FormData();
+        formData.append('file', image);
+      console.log()
       const response = await axios.post(urlList.uploadFile, {
-        file: image
+        file: formData
       })
     } catch (error) {
       console.log(error)

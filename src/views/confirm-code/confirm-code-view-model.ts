@@ -15,10 +15,10 @@ export class ConfirmCodeViewModel {
         try {
             const response = await axios.post(`${urlList.verifyCode}?codeId=${this.model.codeId}&code=${this.model.code}`)
             if (response && response.data) {
+                console.log(response.data)
                 notify('success', 'Вы успешно зарегистрировались!')
                 localStorage.removeItem('confirm_code_id')
-                localStorage.setItem('access_token', response.data)
-                router.push('/profile')
+                router.push('/login')
             }
         } catch (error) {
             console.log(error)
