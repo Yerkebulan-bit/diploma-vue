@@ -17,7 +17,7 @@
         </div>
         <div class="registration__item" v-if="model.selectedUserType  === 'client'">
           <label for="birth">Дата рождения</label>
-          <VueDatePicker v-model="model.birth"></VueDatePicker>
+          <VueDatePicker v-model="model.birth" :enable-time-picker="false"></VueDatePicker>
         </div>
         <div class="registration__item">
           <label for="phone">Номер телефона</label>

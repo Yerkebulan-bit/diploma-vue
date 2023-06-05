@@ -33,7 +33,7 @@ export class LoginViewModel {
                 console.log(response.data)
                localStorage.setItem('access_token', response.data.access_token)
                 this.successLogin()
-                await router.push('/profile')
+                window.location.href = '/'
             }
         } catch (error) {
             console.log(error)

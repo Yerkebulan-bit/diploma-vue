@@ -48,6 +48,7 @@ export class RegistrationViewModel {
             return
         }
         try {
+
             const response = await axios.post(urlList.organizationRegistration, {
                 name: this.model.name,
                 email: this.model.email,
