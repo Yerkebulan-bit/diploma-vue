@@ -28,8 +28,9 @@ export class LoginViewModel {
                     }
                 }
             )
-            if (response && response.data.access_token) {
-                LocalStorageService.setItem('access_token', response.data.access_token)
+            if (response && response.data) {
+                console.log(response.data)
+               localStorage.setItem('access_token', response.data.access_token)
                 this.successLogin()
                 window.location.href = '/profile';
             }

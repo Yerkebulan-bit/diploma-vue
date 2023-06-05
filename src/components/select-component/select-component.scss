@@ -1,0 +1,27 @@
+.select-component {
+  position: relative;
+  &__header {
+  }
+
+  &__title {
+    background: red;
+  }
+
+  &__close {
+  }
+
+  &__content {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  &__list {
+  }
+
+  &__item {
+  }
+
+  &__small-title {
+  }
+}

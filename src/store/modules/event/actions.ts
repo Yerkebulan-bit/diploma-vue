@@ -1,17 +1,21 @@
 import axios from 'axios'
 import { urlList } from '@/utiities/constants/urlList'
 import { notify } from '@/utiities/functions/notify'
+import {LocalStorageService} from "@/assets/services/local-storage-service";
 
 export default {
   async fetchEventDetail({ commit }: { commit: Function }, id: string) {
     try {
-      const accessToken = localStorage.getItem('access_token')
-      const response = await axios.get(`${urlList.getEventDetail}/${id}`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`
-        }
-      })
-      if (response) commit('setEventDetail', response.data)
+      const accessToken = LocalStorageService.getItem('access_token')
+     if (accessToken == null) {
+        const response = await axios.get(`${urlList.getEventDetail}/${id}`)
+        if (response) commit('setEventDetail', response.data)
+        return
+     }
+     else {
+       const response = await axios.get(`${urlList.getEventDetail}/${id}`)
+         if (response) commit('setEventDetail', response.data)
+     }
     } catch (error) {
       console.log(error)
     }

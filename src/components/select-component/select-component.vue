@@ -3,7 +3,6 @@ import type { PropType } from 'vue'
 import type {WeekToSelect} from "@/domain/interfaces/WeekToSelect.interace";
 
 defineProps({
-
   selectedItem: Object as PropType<WeekToSelect>,
   items: Array as PropType<WeekToSelect[]>
 })
@@ -33,4 +32,6 @@ defineProps({
   </div>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+@import "select-component";
+</style>
