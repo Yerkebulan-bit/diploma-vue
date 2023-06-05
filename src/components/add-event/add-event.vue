@@ -26,6 +26,20 @@ const event:Ref<IEventToSave> = ref({
   organizationId: '',
 })
 
+const emit = defineEmits(['selectImage', 'saveEvent', 'selectWeekDay', 'selectEventType'])
+const onFilePicked = (event : any) => {
+    const files = event.target.files
+    let filename = files[0].name
+    const fileReader = new FileReader()
+    // fileReader.addEventListener('load', () => {
+    //   this.imageUrl = fileReader.result
+    // })
+    fileReader.readAsDataURL(files[0])
+    const image = files[0]
+  console.log(image)
+  emit('selectImage', image)
+  }
+
 </script>
 
 <template>
@@ -112,15 +126,15 @@ const event:Ref<IEventToSave> = ref({
           <select-component v-if="weekDays" @select="$emit('selectWeekDay', $event);event.day = $event" :items="weekDays" :selected-item="weekDays.find(item => item.isActive)">
           </select-component>
         </div>
-        <div class="add-event__item">
-          <label for="username">Изображение</label>
+<!--        <div class="add-event__item">-->
+<!--          <label for="username">Изображение</label>-->
 <!--          <input-->
 <!--              type="file"-->
-<!--              @change="$emit('selectImage', $event.target.file);console.log($event)"-->
+<!--              @change="onFilePicked"-->
 <!--              class="add-event__input"-->
 <!--              name="username"-->
 <!--          />-->
-        </div>
+<!--        </div>-->
         <div class="add-event__item">
           <button class="add-event__button" type="submit">Сохранить</button>
         </div>

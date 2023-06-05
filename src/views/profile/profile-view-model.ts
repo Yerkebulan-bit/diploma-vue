@@ -202,6 +202,7 @@ export class ProfileViewModel {
   }
 
   async uploadImage(image: any) {
+    console.log(image)
     try {
       const response = await axios.post(urlList.uploadFile, {
         file: image
