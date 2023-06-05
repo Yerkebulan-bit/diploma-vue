@@ -27,6 +27,7 @@ const event:Ref<IEventToSave> = ref({
   imageId: "8",
   day: '',
   organizationId: '',
+  limit: 0,
 })
 
 const emit = defineEmits(['selectImage', 'saveEvent', 'selectWeekDay', 'selectEventType'])
@@ -123,10 +124,20 @@ const uploadFile = (event: any) => {
           />
         </div>
         <div class="add-event__item">
+          <label for="limit">Количество мест</label>
+          <input
+              type="text"
+              class="add-event__input"
+              name="limit"
+              v-model="event.limit"
+          />
+        </div>
+        <div class="add-event__item">
           <label for="username">День проведения</label>
           <select-component v-if="weekDays" @select="$emit('selectWeekDay', $event);event.day = $event" :items="weekDays" :selected-item="weekDays.find(item => item.isActive)">
           </select-component>
         </div>
+
         <div class="add-event__item">
           <label for="username">Изображение</label>
           <input

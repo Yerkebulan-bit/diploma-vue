@@ -11,4 +11,5 @@ export interface IEventToSave {
     location: string,
     organizationId: string,
     day: string,
+    limit: number
 }
