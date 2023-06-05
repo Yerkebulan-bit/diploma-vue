@@ -114,12 +114,12 @@ const event:Ref<IEventToSave> = ref({
         </div>
         <div class="add-event__item">
           <label for="username">Изображение</label>
-          <input
-              type="file"
-              @change="$emit('selectImage', $event.target.file);console.log($event)"
-              class="add-event__input"
-              name="username"
-          />
+<!--          <input-->
+<!--              type="file"-->
+<!--              @change="$emit('selectImage', $event.target.file);console.log($event)"-->
+<!--              class="add-event__input"-->
+<!--              name="username"-->
+<!--          />-->
         </div>
         <div class="add-event__item">
           <button class="add-event__button" type="submit">Сохранить</button>
