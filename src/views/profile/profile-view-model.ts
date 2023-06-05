@@ -107,8 +107,7 @@ export class ProfileViewModel {
       })
       if (response && response.data) {
         this.model.user = response.data
-        const store = useStore();
-        store.commit("auth/setUser", response.data);
+        localStorage.setItem('user_id', this.model.user.id)
       }
     } catch (error) {
       console.log(error)
@@ -164,6 +163,7 @@ export class ProfileViewModel {
       const access_token: string = LocalStorageService.getItem('access_token')
       const response = await axios.post(urlList.saveEvent, {
         ...event,
+        time: event.time.hours + ':' + event.time.minutes,
         organizationId: this.model.organization.id
       }, {
         headers: {
@@ -192,6 +192,12 @@ export class ProfileViewModel {
     console.log(day)
     this.model.weekDays.forEach((weekDay: WeekToSelect) => {
       weekDay.isActive = weekDay.value === day
+    })
+  }
+
+  selectEventType(eventType: string) {
+    this.model.eventTypes.forEach((type: any) => {
+        type.isActive = type.value === eventType
     })
   }
 }

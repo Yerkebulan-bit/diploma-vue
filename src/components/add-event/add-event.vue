@@ -9,6 +9,7 @@ import type {WeekToSelect} from "@/domain/interfaces/WeekToSelect.interace";
 
 defineProps({
   weekDays: Array as PropType<WeekToSelect[]>,
+  eventTypes: Array as PropType<WeekToSelect[]>,
 })
 
 const event:Ref<IEventToSave> = ref({
@@ -41,12 +42,8 @@ const event:Ref<IEventToSave> = ref({
         </div>
         <div class="add-event__item">
           <label for="username">Тип мероприятия</label>
-          <input
-              type="text"
-              class="add-event__input"
-              name="username"
-              v-model="event.type"
-          />
+          <select-component v-if="eventTypes" @select="$emit('selectEventType', $event);event.type = $event" :items="eventTypes" :selected-item="eventTypes.find(item => item.isActive)">
+          </select-component>
         </div>
         <div class="add-event__item">
           <label for="username">Краткое описание</label>
@@ -59,12 +56,6 @@ const event:Ref<IEventToSave> = ref({
         </div>
         <div class="add-event__item">
           <label for="username">Время проведения</label>
-<!--          <input-->
-<!--              type="text"-->
-<!--              class="add-event__input"-->
-<!--              name="username"-->
-<!--              v-model="event.time"-->
-<!--          />-->
           <VueDatePicker v-model="event.time" time-picker />
         </div>
         <div class="add-event__item">

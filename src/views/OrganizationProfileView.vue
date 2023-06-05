@@ -7,7 +7,6 @@
     ></page-header>
     <div class="profile__container _container">
       <div class="profile__wrapper">
-        {{ weekDays }}
         <tabs-component :tabs="tabs" @select="$emit('selectTab', $event)"></tabs-component>
         <div class="profile__content">
           <div class="profile__info">
@@ -24,7 +23,7 @@
             <div class="profile__text" v-else>Список мероприятиев пуст</div>
           </div>
           <div class="profile-add-event" v-if="selectedTab === 3">
-            <add-event @selectWeekDay="$emit('selectWeekDay', $event)" :week-days="weekDays" @saveEvent="$emit('saveEvent', $event)"></add-event>
+            <add-event @selectEventType="$emit('selectEventType', $event)" @selectWeekDay="$emit('selectWeekDay', $event)" :week-days="weekDays" :eventTypes="eventTypes" @saveEvent="$emit('saveEvent', $event)"></add-event>
           </div>
         </div>
       </div>
@@ -61,6 +60,10 @@ defineProps({
     required: true
   },
   weekDays: {
+    type: Array as PropType<WeekToSelect[]>,
+    required: true
+  },
+  eventTypes: {
     type: Array as PropType<WeekToSelect[]>,
     required: true
   }

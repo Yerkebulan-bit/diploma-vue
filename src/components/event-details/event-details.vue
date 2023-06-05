@@ -4,25 +4,25 @@
       <div class="event-main__container _container">
         <div class="event-main__info">
           <div class="event-main__genre"></div>
-          <div class="event-main__name">{{event.name}}</div>
-          <div class="event-main__description">{{event.shortDescription}}</div>
+          <div class="event-main__name">{{event?.name}}</div>
+          <div class="event-main__description">{{event?.shortDescription}}</div>
         </div>
-        <div class="event-main__rating" v-if="event.rating">
-          <i class="fa fa-star" v-for="rate in event.rating"></i>
+        <div class="event-main__rating" v-if="event?.rating">
+          <i class="fa fa-star" v-for="rate in event?.rating"></i>
         </div>
         <div class="event-main__action">
-          <div class="event-main__icon">{{ event.constraints }}</div>
+          <div class="event-main__icon">{{ event?.constraints }}</div>
           <div class="event-main__statistics">
             <div class="event-main__item">
               <div class="event-main__number">Расположение</div>
-              <span>{{ event.location }}</span>
+              <span>{{ event?.location }}</span>
             </div>
           </div>
         </div>
         <div class="event-main__group">
 
-          <button class="event-main__btn" @click="$emit(event.isFollowed ? 'unFollowEvent' : 'followEvent', event.id)">
-            {{ event.isFollowed ? 'Отписаться' : 'Подписаться' }}
+          <button class="event-main__btn" @click="$emit(event?.isFollowed ? 'unFollowEvent' : 'followEvent', event.id)">
+            {{ event?.isFollowed ? 'Отписаться' : 'Подписаться' }}
           </button>
           <div class="event-main__text" v-if="event.isFollowed">Вы успешно подписаны на мероприятие</div>
         </div>
@@ -41,14 +41,14 @@
             <div class="event-synopsis__info">
               <div class="event-synopsis__name">Описание</div>
               <div class="event-synopsis__description">
-                {{ event.description }}
+                {{ event?.description }}
               </div>
-              <ul class="event-synopsis__additional-info" v-if="event.organization">
-                <li><span>ОРГАНИЗАЦИЯ</span>{{ event.organization.name }}</li>
-                <li><span>НОМЕР ТЕЛЕФОНА</span>{{event.organization.phone}}</li>
-                <li><span>ПОЧТА</span>{{event.organization.email}}</li>
-                <li><span>САЙТ</span>{{event.organization.site}}</li>
-                <li><span>АДРЕСС</span>{{event.organization.address}}</li>
+              <ul class="event-synopsis__additional-info" v-if="event?.organization">
+                <li><span>ОРГАНИЗАЦИЯ</span>{{ event?.organization?.name }}</li>
+                <li><span>НОМЕР ТЕЛЕФОНА</span>{{event?.organization?.phone}}</li>
+                <li><span>ПОЧТА</span>{{event?.organization?.email}}</li>
+                <li><span>САЙТ</span>{{event?.organization?.site}}</li>
+                <li><span>АДРЕСС</span>{{event?.organization?.address}}</li>
               </ul>
               <ul class="event-synopsis__social">
                 <li>
@@ -71,7 +71,7 @@
       <div class="event-comments__container _container">
         <div class="event-comments__content">
           <h2 class="event-comments__title">Комментарии</h2>
-          <div class="event-comments__items" v-if="comments.length > 0">
+          <div class="event-comments__items" v-if="comments?.length > 0">
             <div class="event-comments__item" v-for="comment in comments" >
               <div class="event-comments__avatar _ibg">
                 <img src="../../assets/img/comment/undefined-user.png" alt="">
@@ -142,7 +142,7 @@ const store = useStore()
 const newComment: Ref<string> = ref('')
 const name: Ref<string> = ref('')
 const getYoutubeLink = computed(() => {
-  return props.event.ytUrl.replace('watch?v=', 'embed/')
+  return props.event && props.event?.ytUrl?.replace('watch?v=', 'embed/')
 })
 
 const isAuthUser: Ref<boolean> = ref(localStorage.getItem('access_token') ? true : false)

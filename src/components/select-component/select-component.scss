@@ -1,29 +1,54 @@
 .select-component {
-  position: relative;
+
   &__header {
+    position: relative;
   }
 
   &__title {
-    background: red;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    margin-bottom: 5px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #4a4a4a;
+    transition: all 0.3s ease 0s;
+    border: 1px solid #d8d8d8;
+    height: 41px;
+    padding: 0 15px;
+    cursor: pointer;
   }
 
   &__close {
   }
 
   &__content {
+    border: 1px solid #d8d8d8;
+    background: var(--white);
+    transition: all 0.3s ease 0s;
     position: absolute;
-    top: 30px;
+    top: 50px;
     left: 0;
     width: 100%;
-    background: green;
+    padding: 10px 15px;
   }
 
   &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
 
   &__item {
   }
 
   &__small-title {
+    font-size: 12px;
+    display: block;
+    margin-bottom: 5px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #4a4a4a;
+    cursor: pointer;
   }
 }

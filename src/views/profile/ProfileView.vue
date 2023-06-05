@@ -24,12 +24,14 @@ const viewModel: Ref<any> = ref(new ProfileViewModel(model.value))
     v-if="model.userType === 'ORG'"
     :organization="model.organization"
     :week-days="model.weekDays"
+    :event-types="model.eventTypes"
     :tabs="model.tabs"
     :selected-tab="model.selectedTabId"
     :events="model.eventsByOrg"
     @selectTab="viewModel.selectTab($event)"
     @saveEvent="viewModel.saveEvent($event)"
     @selectWeekDay="viewModel.selectWeekDay($event)"
+    @selectEventType="viewModel.selectEventType($event)"
 
   ></organization-profile-view>
 </template>

@@ -3,7 +3,7 @@ export interface IEventToSave {
     name: string,
     type: string,
     shortDescription: string,
-    time: string,
+    time: any,
     runningTime: string,
     constraints: string,
     startedAt: string,
