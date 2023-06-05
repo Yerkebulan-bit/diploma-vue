@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import type {PropType, Ref} from "vue";
 import type {IEventToSave} from "@/domain/interfaces/response/event-to-save.interface";
-import {ref} from "vue";
+import {computed, ref} from "vue";
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import SelectComponent from "@/components/select-component/select-component.vue";
 import type {WeekToSelect} from "@/domain/interfaces/WeekToSelect.interace";
+import axios from "axios";
+import {urlList} from "@/utiities/constants/urlList";
 
 defineProps({
   weekDays: Array as PropType<WeekToSelect[]>,
@@ -22,23 +24,22 @@ const event:Ref<IEventToSave> = ref({
   startedAt: '',
   description: '',
   location: '',
+  imageId: "8",
   day: '',
   organizationId: '',
 })
 
 const emit = defineEmits(['selectImage', 'saveEvent', 'selectWeekDay', 'selectEventType'])
-const onFilePicked = (event : any) => {
-    const files = event.target.files
-    let filename = files[0].name
-    const fileReader = new FileReader()
-    // fileReader.addEventListener('load', () => {
-    //   this.imageUrl = fileReader.result
-    // })
-    fileReader.readAsDataURL(files[0])
-    const image = files[0]
-  console.log(image)
-  emit('selectImage', image)
-  }
+
+const file: any = ref(null);
+
+const fileName = computed(() => file.value?.name);
+const fileExtension = computed(() => fileName.value?.substr(fileName.value?.lastIndexOf(".") + 1));
+const fileMimeType = computed(() => file.value?.type);
+
+const uploadFile = (event: any) => {
+  file.value = event.target.files[0];
+};
 
 </script>
 
@@ -126,15 +127,14 @@ const onFilePicked = (event : any) => {
           <select-component v-if="weekDays" @select="$emit('selectWeekDay', $event);event.day = $event" :items="weekDays" :selected-item="weekDays.find(item => item.isActive)">
           </select-component>
         </div>
-<!--        <div class="add-event__item">-->
-<!--          <label for="username">Изображение</label>-->
-<!--          <input-->
-<!--              type="file"-->
-<!--              @change="onFilePicked"-->
-<!--              class="add-event__input"-->
-<!--              name="username"-->
-<!--          />-->
-<!--        </div>-->
+        <div class="add-event__item">
+          <label for="username">Изображение</label>
+          <input
+              type="file"
+              class="add-event__input"
+              name="username"
+          />
+        </div>
         <div class="add-event__item">
           <button class="add-event__button" type="submit">Сохранить</button>
         </div>

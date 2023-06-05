@@ -173,6 +173,7 @@ export class ProfileViewModel {
         if (response && response.data) {
           await this.getEventsByOrg()
           notify('success', 'Мероприятие успешно добавлено')
+          this.selectTab(2)
 
         }
     } catch (error) {
@@ -186,6 +187,7 @@ export class ProfileViewModel {
       tab.isActive = tab.id === tabId
     })
     this.model.selectedTabId = tabId
+    window.scrollTo(0, 0)
   }
 
   selectWeekDay(day: string) {
