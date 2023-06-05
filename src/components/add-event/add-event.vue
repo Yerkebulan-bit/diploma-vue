@@ -115,10 +115,10 @@ const event:Ref<IEventToSave> = ref({
         <div class="add-event__item">
           <label for="username">Изображение</label>
           <input
-              type="text"
+              type="file"
+              @change="$emit('selectImage', $event.target.file);k"
               class="add-event__input"
               name="username"
-              v-model="event.location"
           />
         </div>
         <div class="add-event__item">

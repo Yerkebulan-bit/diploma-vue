@@ -13,6 +13,7 @@ export const urlList = {
     'login': 'https://yerkebulan-diploma.herokuapp.com/oauth/token',
     'loginOrg': 'https://yerkebulan-diploma.herokuapp.com/oauth/token',
     'getFile': 'https://yerkebulan-diploma.herokuapp.com/file/load',
+    'uploadFile': 'https://yerkebulan-diploma.herokuapp.com/file/upload',
     'getEventComments': 'https://yerkebulan-diploma.herokuapp.com/comment/load-event-comments',
     'saveComment': 'https://yerkebulan-diploma.herokuapp.com/comment/save',
     'followEvent': 'https://yerkebulan-diploma.herokuapp.com/user/follow-event',

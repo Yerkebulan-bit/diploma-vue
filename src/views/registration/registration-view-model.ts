@@ -62,7 +62,7 @@ export class RegistrationViewModel {
             })
             if (response && response.data) {
                 LocalStorageService.setItem('confirm_code_id', response.data)
-                window.location.href = '/confirm-code'
+                await router.push('/confirm-code')
             }
         } catch (error) {
             console.log(error)

@@ -23,7 +23,8 @@
             <div class="profile__text" v-else>Список мероприятиев пуст</div>
           </div>
           <div class="profile-add-event" v-if="selectedTab === 3">
-            <add-event @selectEventType="$emit('selectEventType', $event)" @selectWeekDay="$emit('selectWeekDay', $event)" :week-days="weekDays" :eventTypes="eventTypes" @saveEvent="$emit('saveEvent', $event)"></add-event>
+            <add-event @selectEventType="$emit('selectEventType', $event)" @selectImage="$emit('selectImage', $event);
+            " @selectWeekDay="$emit('selectWeekDay', $event)" :week-days="weekDays" :eventTypes="eventTypes" @saveEvent="$emit('saveEvent', $event)"></add-event>
           </div>
         </div>
       </div>

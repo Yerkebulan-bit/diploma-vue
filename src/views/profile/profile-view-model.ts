@@ -200,4 +200,14 @@ export class ProfileViewModel {
         type.isActive = type.value === eventType
     })
   }
+
+  async uploadImage(image: any) {
+    try {
+      const response = await axios.post(urlList.uploadFile, {
+        file: image
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
 }

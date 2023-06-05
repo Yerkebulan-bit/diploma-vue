@@ -32,6 +32,7 @@ const viewModel: Ref<any> = ref(new ProfileViewModel(model.value))
     @saveEvent="viewModel.saveEvent($event)"
     @selectWeekDay="viewModel.selectWeekDay($event)"
     @selectEventType="viewModel.selectEventType($event)"
+    @selectImage="viewModel.uploadImage($event)"
 
   ></organization-profile-view>
 </template>
